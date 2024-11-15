@@ -1,0 +1,80 @@
+[
+    {
+      "date": "01/05",
+      "description": "SALDO AWAL",
+      "branch": "",
+      "mutation": "30,000.00 DB",
+      "balance": "-468,041,422.19"
+    },
+    {
+      "date": "02/05",
+      "description": "TRSF E-BANKING DB 0205/FTSCY/WS95051135154282.00 rk HENRY SISWANTO HAD",
+      "branch": "",
+      "mutation": "135,154,282.00 DB",
+      "balance": "-700,000,000.45"
+    },
+    {
+      "date": "03/05",
+      "description": "TRSF E-BANKING DB 0305/FTSCY/WS95051300000000.00 rk HENRY SISWANTO HAD",
+      "branch": "",
+      "mutation": "300,000,000.00 DB",
+      "balance": "-1,000,000,000.45"
+    },
+    {
+      "date": "06/05",
+      "description": "TRSF E-BANKING CR 0605/FTSCY/WS95051100000000.00 bkl HENRY SISWANTO HAD",
+      "branch": "",
+      "mutation": "100,000,000.00",
+      "balance": "-900,000,000.45"
+    },
+    {
+      "date": "13/05",
+      "description": "TRSF E-BANKING DB 1205/FTSCY/WS95051 TANGGAL :12/0550000000.00 HENRY SISWANTO HAD",
+      "branch": "",
+      "mutation": "50,000,000.00 DB",
+      "balance": "-950,000,000.45"
+    },
+    {
+      "date": "21/05",
+      "description": "TRSF E-BANKING CR 2105/FTSCY/WS95051300000000.00 rk ka HENRY SISWANTO HAD",
+      "branch": "",
+      "mutation": "300,000,000.00",
+      "balance": ""
+    },
+    {
+      "date": "21/05",
+      "description": "TRSF E-BANKING DB 2105/FTSCY/WS9505130000000.00 wnsr HENRY SISWANTO HAD",
+      "branch": "",
+      "mutation": "30,000,000.00 DB",
+      "balance": "-680,000,000.45"
+    },
+    {
+      "date": "22/05",
+      "description": "TRSF E-BANKING CR 2205/FTSCY/WS95051250000000.00 rk ka HENRY SISWANTO HAD",
+      "branch": "",
+      "mutation": "250,000,000.00",
+      "balance": "-430,000,000.45"
+    },
+    {
+      "date": "24/05",
+      "description": "TRSF E-BANKING DB 2405/FTSCY/WS9505130000000.00 rk gn HENRY SISWANTO HAD",
+      "branch": "",
+      "mutation": "30,000,000.00 DB",
+      "balance": "-460,000,000.45"
+    },
+    {
+      "date": "27/05",
+      "description": "PEMBAYARAN PINJ. 2588390000 BUNGA KREDIT LOKAL",
+      "branch": "0258",
+      "mutation": "8,011,421.74 DB",
+      "balance": "-468,011,422.19"
+    },
+    {
+      "date": "31/05",
+      "description": "BIAYA ADM SALDO AWAL :",
+      "branch": "-564,845,718.45",
+      "mutation": "30,000.00 DB",
+      "balance": "-564,845,718.45"
+    }
+  ]
+  

@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import LoginPage from './Auth/Login/Login';
+import Dashboard from './Dasboard';
+import SettingsPage from './Pages/Setting';
+import UploadPage from './Pages/Upload';
+import ScannedFilesPage from './Pages/ScanFile';
+import TemplateSelectionPage from './Pages/TemplateSection';
+import FileAnalysisDashboard from './Pages/AnalyzeFile';
+import AnalyticsDashboard from './Pages/AnalyzeDashboard';
+import DocumentProcessingPage from './Pages/Document/ProccesPage';
+import DocumentReviewPage from './Pages/Document/ReviewPage';
+
+// Components for different routes
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div>
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/scanned-files" element={<ScannedFilesPage />} />
+          <Route path="/upload" element={<TemplateSelectionPage />} />
+          <Route path="/upload/:document" element={<UploadPage />} />
+          <Route path="/upload/:document/processed-file" element={<DocumentProcessingPage />} />
+          <Route path="/upload/:document/processed-file/review-file" element={<DocumentReviewPage />} />
+          <Route path="/analyzed-files" element={<AnalyticsDashboard />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
