@@ -18,17 +18,22 @@ const DocumentProcessingPage = () => {
   const [fileUrl, setFileUrl] = useState(null);
 
   // Handle file preview logic
-  const renderFilePreview = () => {
+  const renderFilePreview = (isMainPreview = false) => {
     if (!file || !file[0]) return null; // No file or file array is empty
-
+  
     const fileObj = file[0];  // We assume single file for simplicity
     const filePreviewUrl = URL.createObjectURL(fileObj); // Create a preview URL for the file
-
+  
+    // Adjust the style based on whether it's the main preview or the secondary preview
+    const commonStyle = isMainPreview
+      ? 'w-full h-auto mt-4 object-contain'  // Full width, maintain aspect ratio
+      : 'w-full h-auto mt-4 object-contain';  // Full width, maintain aspect ratio
+  
     if (fileObj.type.startsWith('image')) {
-      // If it's an image, render an image preview
-      return <img src={filePreviewUrl} alt={fileObj.name} className="w-full max-w-[600px] mx-auto mt-4" />;
+      // If it's an image, render an image preview with size adjusted
+      return <img src={filePreviewUrl} alt={fileObj.name} className={commonStyle} />;
     } else if (fileObj.type === 'application/pdf') {
-      // If it's a PDF, render it using react-pdf
+      // If it's a PDF, render it using react-pdf with the size adjusted
       return (
         <div className="flex justify-center mt-4">
           <Document
@@ -44,6 +49,8 @@ const DocumentProcessingPage = () => {
       return <div className="text-center">{fileObj.name}</div>;
     }
   };
+  
+  
 
   // Initialize the file URL only once when the file is available
   useEffect(() => {
@@ -72,12 +79,6 @@ const DocumentProcessingPage = () => {
               <ChevronLeft size={20} />
               <span>Upload</span>
             </button>
-            <div className="flex items-center space-x-2">
-              <span className="text-gray-600">WV</span>
-              <span>Superuser</span>
-              <span>EN</span>
-              <Bell size={20} />
-            </div>
           </div>
         </div>
 
@@ -111,10 +112,10 @@ const DocumentProcessingPage = () => {
           {/* Document Preview */}
           <div className="flex-1 p-4 flex flex-col">
             <div className="flex-1 bg-white rounded-lg border overflow-hidden flex">
-              <div className="w-48 border-r flex flex-col">
+              <div className="w-20 border-r flex flex-col">
                 <div className="p-2 border-b bg-gray-50">
                   <span className="text-sm font-medium text-gray-600">Pages ({totalPages})</span>
-                  {renderFilePreview()}
+                  {renderFilePreview(true)} {/* First preview, smaller size */}
                 </div>
                 {/* Page navigation logic can be added here */}
               </div>
@@ -123,22 +124,25 @@ const DocumentProcessingPage = () => {
                 <div className="h-12 border-b flex justify-between items-center px-4 bg-gray-50">
                   <span className="py-1.5">Page {currentPage} of {totalPages}</span>
                 </div>
-                <div className="flex-1 bg-gray-100 p-4 overflow-auto flex justify-center">
-                  {renderFilePreview()} {/* Display the uploaded file preview here */}
+                <div className="flex-1 bg-gray-100 p-4 overflow-auto">
+                  {/* Second preview, full width and larger */}
+                  {renderFilePreview()} 
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Upload Button */}
-        <div className="p-4">
-          <button
-            onClick={handleUpload}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-          >
-            Upload & Go to Review Page
-          </button>
+        {/* Full-Width Card with Button on the Far Right */}
+        <div className="mt-0">
+          <div className="w-full bg-white border border-gray-300 shadow-lg p-6 flex justify-end">
+            <button
+              onClick={handleUpload}
+              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+            >
+              Upload & Go to Review Page
+            </button>
+          </div>
         </div>
       </div>
     </SidebarLayout>
@@ -147,7 +151,7 @@ const DocumentProcessingPage = () => {
 
 const ProgressStep = ({ number, text, active, completed }) => (
   <div className="flex items-center flex-1">
-    <div className={`flex items-center justify-center w-6 h-6 rounded-full
+    <div className={`flex items-center justify-center w-6 h-6 rounded-full 
       ${completed ? 'bg-green-600 text-white' : active ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'}
       text-sm`}>
       {number}

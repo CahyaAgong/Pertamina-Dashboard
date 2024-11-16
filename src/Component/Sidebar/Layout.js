@@ -6,8 +6,8 @@ import {
 
 const SidebarLayout = ({ children }) => {
   const location = useLocation();
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false); // State to control the sidebar width
-  
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+
   const iconMap = {
     "Dashboard": <Home size={20} />,
     "Document Processing": <Upload size={20} />,
@@ -42,12 +42,15 @@ const SidebarLayout = ({ children }) => {
     <div className="flex min-h-screen bg-gray-50">
       {/* Sidebar */}
       <div
-        className={`transition-all duration-300 ease-in-out bg-white shadow-sm max-h-screen overflow-y-auto ${isSidebarCollapsed ? 'w-16' : 'w-64'}`}
+        className={`fixed top-0 left-0 h-screen bg-white shadow-sm overflow-y-auto transition-all duration-300 ease-in-out ${
+          isSidebarCollapsed ? 'w-16' : 'w-64'
+        }`}
       >
-        {/* Sidebar content */}
         <div className="p-4">
           <div className="flex items-center justify-between">
-            <span className={`text-xl font-bold text-[#1E3A8A] ${isSidebarCollapsed ? 'hidden' : ''}`}>Valida</span>
+            <span className={`text-xl font-bold text-[#1E3A8A] ${isSidebarCollapsed ? 'hidden' : ''}`}>
+              Valida
+            </span>
           </div>
         </div>
 
@@ -56,17 +59,18 @@ const SidebarLayout = ({ children }) => {
             <Link
               key={item.label}
               to={item.to}
-              className={`flex items-center space-x-2 px-4 py-2 cursor-pointer ${location.pathname === item.to ? 'bg-[#EFF6FF] text-[#1E3A8A]' : 'text-[#6B7280] hover:bg-[#F3F4F6]'}`}
+              className={`flex items-center space-x-2 px-4 py-2 cursor-pointer ${
+                location.pathname === item.to
+                  ? 'bg-[#EFF6FF] text-[#1E3A8A]'
+                  : 'text-[#6B7280] hover:bg-[#F3F4F6]'
+              }`}
             >
-              {/* Render the icon based on the label */}
               {iconMap[item.label]}
-              {/* Show label only when sidebar is expanded */}
               <span className={`${isSidebarCollapsed ? 'hidden' : ''}`}>{item.label}</span>
             </Link>
           ))}
         </nav>
 
-        {/* Sidebar Toggle Button */}
         <div className="absolute bottom-4 left-4">
           <button
             className="flex items-center justify-center w-10 h-10 bg-[#1E3A8A] text-white rounded-full"
@@ -78,7 +82,11 @@ const SidebarLayout = ({ children }) => {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 p-8 bg-[#F3F4F6] overflow-y-auto">
+      <div
+        className={`flex-1 min-h-screen bg-[#F3F4F6] p-8 overflow-y-auto transition-all duration-300 ease-in-out ${
+          isSidebarCollapsed ? 'ml-16' : 'ml-64'
+        }`}
+      >
         {children}
       </div>
     </div>

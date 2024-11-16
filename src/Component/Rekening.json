@@ -1,0 +1,47 @@
+[
+    {
+      "header": "Total Mutasi Debit",
+      "value": 553195703.74
+    },
+    {
+      "header": "Total Mutasi Kredit",
+      "value": 650000000.00
+    },
+    {
+      "header": "Frekuensi Mutasi Debit",
+      "value": 7
+    },
+    {
+      "header": "Frekuensi Mutasi Kredit",
+      "value": 3
+    },
+    {
+      "header": "Mutasi Debit Tertinggi",
+      "value": 300000000.00
+    },
+    {
+      "header": "Mutasi Debit Terendah",
+      "value": 30000.00
+    },
+    {
+      "header": "Mutasi Kredit Tertinggi",
+      "value": 300000000.00
+    },
+    {
+      "header": "Mutasi Kredit Terendah",
+      "value": 100000000.00
+    },
+    {
+      "header": "Saldo Tertinggi",
+      "value": -430000000.45
+    },
+    {
+      "header": "Saldo Terendah",
+      "value": -1000000000.45
+    },
+    {
+      "header": "Saldo Rata-Rata",
+      "value": -662089856.60
+    }
+  ]
+  

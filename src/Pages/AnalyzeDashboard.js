@@ -11,6 +11,9 @@ import TransactionDashboard from '../Component/Dashboard/Transaction';
 import MerchantDashboard from '../Component/Dashboard/Merchant';
 import DynamicTableWithPagination from '../Component/DynamicForm/DynamicTable';
 import DynamicLineChart from '../Component/DynamicForm/DynamicLineChart';
+import DynamicBarChart from '../Component/DynamicForm/DynamicBarChart';
+import AnalyticsTransaction from '../Component/Dashboard/TabTransaction';
+import profileData from '../Component/Profile.json'
 
 const AnalyticsDashboard = () => {
   const [activeTab, setActiveTab] = useState("Transaction"); // Track active tab
@@ -71,9 +74,6 @@ const AnalyticsDashboard = () => {
 
         {/* Action Buttons */}
         <div className="px-4 py-2 flex justify-end space-x-2">
-          <button className="flex items-center px-4 py-2 text-red-600 bg-red-50 rounded-lg">
-            <Trash2 size={18} className="mr-2" /> Delete
-          </button>
           <button className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg">
             <FileUp size={18} className="mr-2" /> Export to PDF/XLS
           </button>
@@ -103,44 +103,44 @@ const AnalyticsDashboard = () => {
               <div>
                 <div className="space-y-1">
                   <label className="text-sm text-gray-600">Name</label>
-                  <p className="font-medium">NINA NURSITA RAMADHAN</p>
+                  <p className="font-medium">{profileData.name}</p>
                 </div>
                 <div className="mt-4 space-y-1">
                   <label className="text-sm text-gray-600">Account Number</label>
-                  <p className="font-medium">340010992045O8</p>
+                  <p className="font-medium">{profileData.account_number}</p>
                 </div>
                 <div className="mt-4 space-y-1">
                   <label className="text-sm text-gray-600">Period</label>
-                  <p className="font-medium">2023-07-01 - 2023-07-30</p>
+                  <p className="font-medium">{profileData.period}</p>
                 </div>
               </div>
             </div>
             <div>
               <div className="space-y-1">
                 <label className="text-sm text-gray-600">Branch</label>
-                <p className="font-medium">KC Jakarta Otista</p>
+                <p className="font-medium">{profileData.branch}</p>
               </div>
               <div className="mt-4 space-y-1">
                 <label className="text-sm text-gray-600">Created by</label>
-                <p className="font-medium">-</p>
+                <p className="font-medium">{profileData.created_by}</p>
               </div>
               <div className="mt-4 space-y-1">
                 <label className="text-sm text-gray-600">Bank</label>
-                <p className="font-medium">BCA</p>
+                <p className="font-medium">{profileData.bank}</p>
               </div>
             </div>
             <div>
               <div className="space-y-1">
                 <label className="text-sm text-gray-600">File Uploaded</label>
-                <p className="font-medium">1</p>
+                <p className="font-medium">{profileData.file_uploaded}</p>
               </div>
               <div className="mt-4 space-y-1">
                 <label className="text-sm text-gray-600">Address</label>
-                <p className="font-medium">Jl. Otista 72 Jakarta Timur</p>
+                <p className="font-medium">{profileData.address}</p>
               </div>
               <div className="mt-4 space-y-1">
                 <label className="text-sm text-gray-600">Currency</label>
-                <p className="font-medium">IDR</p>
+                <p className="font-medium">{profileData.currency}</p>
               </div>
             </div>
           </div>
@@ -161,13 +161,19 @@ const AnalyticsDashboard = () => {
           {activeTab === "Balance Overview" && <AnalyticsDashboardBalance />}
           {activeTab === "Transaction" && (
             <>
-              <DynamicTableWithPagination /> {/* Existing Transaction Table */}
-              <DynamicLineChart /> {/* Add the chart below the table */}
+              <AnalyticsTransaction />
+              <div className="flex space-x-4">
+                <div className="flex-1">
+                  <DynamicLineChart />
+                </div>
+                <div className="flex-1">
+                  <DynamicBarChart />
+                </div>
+              </div>
             </>
-          )} 
-          {activeTab === "Transaction Behavior" && <TransactionDashboard />} 
-          {activeTab === "Merchant Analysis" && <MerchantDashboard />} 
-          {/* Add other components for different tabs here */}
+          )}
+          {activeTab === "Transaction Behavior" && <TransactionDashboard />}
+          {activeTab === "Merchant Analysis" && <MerchantDashboard />}
         </div>
       </div>
     </SidebarLayout>
@@ -177,7 +183,7 @@ const AnalyticsDashboard = () => {
 // TabItem Component
 const TabItem = ({ text, active, onClick }) => (
   <button
-    className={`px-4 py-2 border-b-2 ${active ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-600'}`}
+    className={`px-4 py-2 text-sm font-medium ${active ? 'border-b-2 border-blue-600 text-blue-600' : 'text-gray-600 hover:text-blue-600'}`}
     onClick={onClick}
   >
     {text}

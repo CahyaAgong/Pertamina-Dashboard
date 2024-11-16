@@ -54,7 +54,7 @@ const UploadPage = () => {
   return (
     <SidebarLayout>
       <div className="flex-1 p-8">
-        <div className="mb-8 p-6 bg-white border border-gray-300 rounded-lg shadow-sm">
+        <div className="p-6 bg-white border border-gray-300 shadow-sm">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-2">
               <button className="flex items-center text-gray-600 hover:text-gray-900">
@@ -62,32 +62,20 @@ const UploadPage = () => {
                 <span>Upload</span>
               </button>
             </div>
-            <div className="flex items-center space-x-4 text-black">
-              <span>WV</span>
-              <span className="text-[12px]">Superuser</span>
-              <Bell size={20} />
-            </div>
           </div>
         </div>
 
         {/* Progress Steps */}
-        <div className="flex items-center mb-8">
-          {[
-            { number: "1", text: "Upload Your File", active: progressStep >= 1 },
-            { number: "2", text: "Processing Files", active: progressStep >= 2 },
-            { number: "3", text: "Relabel Results", active: progressStep >= 3 },
-          ].map((step) => (
-            <ProgressStep
-              key={step.number}
-              number={step.number}
-              text={step.text}
-              active={step.active}
-            />
-          ))}
+        <div className="px-8 py-4 bg-white border shadow-sm">
+          <div className="flex items-center max-w-3xl mx-auto">
+            <ProgressStep number="1" text="Upload Your File" completed />
+            <ProgressStep number="2" text="Processing Files" />
+            <ProgressStep number="3" text="Relabel Results" />
+          </div>
         </div>
 
         {/* Upload Form */}
-        <div className="mb-8 p-6 bg-white border border-gray-300 rounded-lg shadow-sm">
+        <div className="p-6 bg-white border border-gray-300 shadow-sm">
           <div className="grid grid-cols-3 gap-8">
             <div className="space-y-6">
               <div>
@@ -153,7 +141,7 @@ const UploadPage = () => {
 
         {/* Show the upload progress bar */}
         {isUploading && (
-          <div className="mb-8">
+          <div>
             <div className="w-full bg-gray-200 h-2.5 rounded-full">
               <div
                 className="bg-blue-600 h-2.5 rounded-full"
@@ -165,14 +153,21 @@ const UploadPage = () => {
         )}
 
         {/* Button to go to Document Processing */}
+        {/* Full-width Card Container for the Button */}
         {progressStep === 3 && !isUploading && (
-          <div className="mt-4">
-            <button
-              onClick={handleGoToDocumentProcessing} // Navigate to DocumentProcessingPage
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
-            >
-              Go to Document Processing
-            </button>
+          <div className="mt-0">
+            {/* Card Container Full Width */}
+            <div className="w-full bg-white border border-gray-300 shadow-lg p-6 ">
+              <div className="flex justify-end">
+                {/* Centered Button inside the Card */}
+                <button
+                  onClick={handleGoToDocumentProcessing} // Navigate to DocumentProcessingPage
+                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+                >
+                  Go to Document Processing
+                </button>
+              </div>
+            </div>
           </div>
         )}
       </div>
@@ -180,14 +175,17 @@ const UploadPage = () => {
   );
 };
 
-const ProgressStep = ({ number, text, active }) => (
-  <div className="flex items-center flex-1">
-    <div className={`flex items-center justify-center w-6 h-6 rounded-full ${active ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'} text-sm`}>
-      {number}
+// Define ProgressStep component
+const ProgressStep = ({ number, text, completed, active }) => {
+  return (
+    <div className="flex items-center flex-1">
+      <div className={`flex items-center justify-center w-6 h-6 rounded-full ${completed ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'} text-sm`}>
+        {number}
+      </div>
+      <div className={`ml-2 text-sm ${completed ? 'text-gray-900' : 'text-gray-500'}`}>{text}</div>
+      <div className="flex-1 mx-4 h-px bg-gray-200" />
     </div>
-    <div className={`ml-2 text-sm ${active ? 'text-gray-900' : 'text-gray-500'}`}>{text}</div>
-    {number !== "3" && <div className="flex-1 mx-4 h-px bg-gray-200" />}
-  </div>
-);
+  );
+};
 
 export default UploadPage;

@@ -30,14 +30,7 @@ const DocumentReviewPage = () => {
         <div className="p-4 bg-white border-b flex justify-between items-center">
           <div className="flex items-center space-x-2">
             <ChevronLeft className="text-gray-500" size={20} />
-            <span className="text-gray-500">Page {currentPage} of {totalPages}</span>
-          </div>
-          <div className="flex items-center space-x-4">
-            <div className="text-sm text-gray-600">Extraction Level: 100%</div>
-            <div className="flex items-center text-sm">
-              <span className="text-gray-600 mr-2">Confidence Level: 100%</span>
-              <Bell size={16} className="text-gray-400" />
-            </div>
+            <span className="text-gray-500">Upload</span>
           </div>
         </div>
 

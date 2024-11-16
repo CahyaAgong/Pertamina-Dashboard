@@ -25,8 +25,8 @@ const TemplateSelectionPage = () => {
             {/* Template Sections */}
             <div className="space-y-8">
               {/* Customize Templates Section */}
-              <div>
-                <h2 className="text-xl font-semibold mb-2 text-[#1E3A8A]"> {/* Deep Navy for headers */}
+              {/* <div>
+                <h2 className="text-xl font-semibold mb-2 text-[#1E3A8A]">
                   Customize your templates
                 </h2>
                 <p className="text-gray-600 mb-4">
@@ -45,7 +45,7 @@ const TemplateSelectionPage = () => {
                     description="Build your own document extractor in no time with our template"
                   />
                 </div>
-              </div>
+              </div> */}
 
               {/* Ready Templates Section */}
               <div>
