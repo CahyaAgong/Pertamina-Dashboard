@@ -1,32 +1,17 @@
 import React from 'react';
 import {
-  Home, Upload, FileText, Layout, PieChart,
-  HelpCircle, Download, Settings, Bell,
-  Trash2, Filter, Edit, BarChart2,
-  Info, ChevronRight, FileUp
+  Info
 } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import SidebarLayout from '../Sidebar/Layout';
+import balanceData from '../Balance.json'; // Importing the JSON data
 
 const AnalyticsDashboardBalance = () => {
-  // Sample data for the balance chart
-  const balanceData = [
-    { date: '07/01', balance: 0.65 },
-    { date: '07/05', balance: 450000.25 },
-    { date: '07/10', balance: 680500.45 },
-    { date: '07/15', balance: 820300.90 },
-    { date: '07/20', balance: 950400.30 },
-    { date: '07/25', balance: 1020500.75 },
-    { date: '07/30', balance: 1080655.65 }
-  ];
 
   return (
     <>
       {/* Main Content */}
-      <div className="flex-1">
+      <div className="flex-1 bg-gray-50">
         {/* Header section - Same as previous */}
-
-
 
         {/* Balance Overview Content */}
         <div className="p-4 space-y-6">
@@ -35,21 +20,21 @@ const AnalyticsDashboardBalance = () => {
             description="Account balance movement over the selected period"
             icon={<Info size={16} />}
           >
-            <div className="h-96 w-full">
+            <div className="h-72 w-full "> {/* Reduced height */}
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={balanceData}>
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="date" />
-                  <YAxis />
+                  <XAxis dataKey="date" tick={{ fontSize: 10 }} /> {/* Smaller font size for x-axis */}
+                  <YAxis tick={{ fontSize: 10 }} /> {/* Smaller font size for y-axis */}
                   <Tooltip />
-                  <Line type="monotone" dataKey="balance" stroke="#2563eb" strokeWidth={2} />
+                  <Line type="monotone" dataKey="max_balance" stroke="#2563eb" strokeWidth={2} />
                 </LineChart>
               </ResponsiveContainer>
             </div>
           </Section>
 
           <Section title="Balance Statistics" icon={<Info size={16} />}>
-            <div className="grid grid-cols-4 gap-8">
+            <div className="grid grid-cols-4 gap-6"> {/* Reduced gap */}
               <SummaryCard title="Average Balance" value="750,655.65" />
               <SummaryCard title="Highest Balance" value="1,080,655.65" textColor="text-green-600" />
               <SummaryCard title="Lowest Balance" value="0.65" textColor="text-red-600" />
@@ -58,30 +43,38 @@ const AnalyticsDashboardBalance = () => {
           </Section>
 
           <Section title="Daily Balance" icon={<Info size={16} />}>
-            <table className="w-full">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-4 py-2 text-left">Date</th>
-                  <th className="px-4 py-2 text-left">Opening Balance</th>
-                  <th className="px-4 py-2 text-left">Closing Balance</th>
-                  <th className="px-4 py-2 text-left">Daily Change</th>
-                </tr>
-              </thead>
-              <tbody>
-                {balanceData.map((item, index) => (
-                  <tr key={index} className="border-t">
-                    <td className="px-4 py-2">{item.date}</td>
-                    <td className="px-4 py-2">{item.balance.toLocaleString()}</td>
-                    <td className="px-4 py-2">{(item.balance + 1000).toLocaleString()}</td>
-                    <td className="px-4 py-2 text-green-600">+1,000.00</td>
+            <div className="overflow-x-auto"> {/* Make the table scrollable */}
+              <table className="w-full text-xs"> {/* Smaller text size */}
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th className="px-2 py-1 text-left">Date</th> {/* Reduced padding */}
+                    <th className="px-2 py-1 text-left">Opening Balance</th>
+                    <th className="px-2 py-1 text-left">Closing Balance</th>
+                    <th className="px-2 py-1 text-left">Daily Change</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+  {balanceData.map((item, index) => {
+    const dailyChange = item.min_balance - item.max_balance; // Calculate the daily change
+    const dailyChangeFormatted = dailyChange > 0 ? `+${dailyChange.toLocaleString()}` : dailyChange.toLocaleString(); // Format the change with a "+" or just the value
+    return (
+      <tr key={index} className="border-t">
+        <td className="px-2 py-1">{item.date}</td>
+        <td className="px-2 py-1">{item.max_balance.toLocaleString()}</td>
+        <td className="px-2 py-1">{item.min_balance.toLocaleString()}</td> {/* Display min_balance */}
+        {/* <td className="px-2 py-1">{(item.max_balance).toLocaleString()}</td> Display max_balance */}
+        <td className="px-2 py-1 text-green-600">{dailyChangeFormatted}</td> {/* Display the daily change */}
+      </tr>
+    );
+  })}
+</tbody>
+
+              </table>
+            </div>
           </Section>
         </div>
       </div>
-      </>
+    </>
   );
 };
 
@@ -100,7 +93,7 @@ const TabItem = ({ text, active }) => (
 );
 
 const Section = ({ title, description, icon, children }) => (
-  <div className="bg-white rounded-lg p-6">
+  <div className="bg-white rounded-lg p-4 shadow-lg"> {/* Reduced padding */}
     <div className="flex items-center space-x-2 mb-2">
       <h2 className="text-lg font-medium">{title}</h2>
       {icon}

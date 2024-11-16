@@ -4,8 +4,8 @@ import transactionData from '../Rekening.json';
 
 const AnalyticsTransaction = () => {
   // Dynamically extract values for Credit and Debit Transactions
-  const creditTransactionTotal = transactionData.find(item => item.header === 'Total Mutasi Kredit')?.value || 0;
-  const debitTransactionTotal = transactionData.find(item => item.header === 'Total Mutasi Debit')?.value || 0;
+  const creditTransactionTotal = transactionData.find(item => item.header === 'Total Credit Transactions')?.value || 0;
+  const debitTransactionTotal = transactionData.find(item => item.header === 'Total Debit Transactions')?.value || 0;
 
   return (
     <div className="flex min-h-screen bg-gray-50">
@@ -34,8 +34,8 @@ const AnalyticsTransaction = () => {
                 <tr>
                   <td className="px-4 py-2">1</td>
                   <td className="px-4 py-2">Account Number</td>
-                  <td className="px-4 py-2">340010992045O8</td>
-                  <td className="px-4 py-2">BCA - 340010992045O8</td>
+                  <td className="px-4 py-2">5170384719</td>
+                  <td className="px-4 py-2">BCA - 5170384719</td>
                   <td className="px-4 py-2">
                     <span className="text-blue-600">Active</span>
                   </td>

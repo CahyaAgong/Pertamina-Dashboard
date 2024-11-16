@@ -1,6 +1,6 @@
 {
-    "name": "HENRY SISWANTO",
-    "account_number": "340010992045O8",
+    "name": "FIRMAN SAHIDIN",
+    "account_number": "5170384719",
     "period": "2023-07-01 - 2023-07-30",
     "branch": "KC Jakarta Otista",
     "created_by": "-",
@@ -8,5 +8,6 @@
     "file_uploaded": 1,
     "address": "Jl. Otista 72 Jakarta Timur",
     "currency": "IDR",
+    "Account_Type": "Savings account",
     "detect_fraud": "Yes"
   }

@@ -1,0 +1,53 @@
+[
+    {
+      "date": "01/05",
+      "max_balance": 564845718.45,
+      "min_balance": 564845718.45
+    },
+    {
+      "date": "02/05",
+      "max_balance": 700000000.45,
+      "min_balance": 700000000.45
+    },
+    {
+      "date": "03/05",
+      "max_balance": 1000000000.45,
+      "min_balance": 1000000000.45
+    },
+    {
+      "date": "06/05",
+      "max_balance": 900000000.45,
+      "min_balance": 900000000.45
+    },
+    {
+      "date": "13/05",
+      "max_balance": 950000000.45,
+      "min_balance": 950000000.45
+    },
+    {
+      "date": "21/05",
+      "max_balance": 0,
+      "min_balance": 680000000.45
+    },
+    {
+      "date": "22/05",
+      "max_balance": 430000000.45,
+      "min_balance": 430000000.45
+    },
+    {
+      "date": "24/05",
+      "max_balance": 460000000.45,
+      "min_balance": 460000000.45
+    },
+    {
+      "date": "27/05",
+      "max_balance": 468011422.19,
+      "min_balance": 468011422.19
+    },
+    {
+      "date": "31/05",
+      "max_balance": 468041422.19,
+      "min_balance": 468041422.19
+    }
+  ]
+  

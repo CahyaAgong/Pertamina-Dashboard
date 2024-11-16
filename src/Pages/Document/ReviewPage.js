@@ -27,15 +27,26 @@ const DocumentReviewPage = () => {
   return (
     <SidebarLayout>
       <div className="flex-1 flex flex-col">
+        {/* Progress Steps */}
+
+
         <div className="p-4 bg-white border-b flex justify-between items-center">
           <div className="flex items-center space-x-2">
             <ChevronLeft className="text-gray-500" size={20} />
             <span className="text-gray-500">Upload</span>
           </div>
         </div>
+        <div className="px-8 py-4 bg-white border-b">
+          <div className="flex items-center max-w-3xl mx-auto">
+            <ProgressStep number="1" text="Upload Your File" completed />
+            <ProgressStep number="2" text="Processing Files" completed />
+            <ProgressStep number="3" text="Relabel Results" active/>
+          </div>
+        </div>
 
         <div className="flex flex-1">
-          <div className="w-1/2 border-r bg-gray-100 p-4">
+          {/* Image Preview Section */}
+          <div className="w-1/3 border-r bg-gray-100 p-4">
             <div className="bg-gray-800 text-white p-2 rounded-t-lg flex items-center justify-between">
               <input
                 type="text"
@@ -45,48 +56,47 @@ const DocumentReviewPage = () => {
               />
               {/* Add zoom and rotation buttons */}
             </div>
-            <div className="bg-white h-[calc(100vh-200px)] rounded-b-lg">
+            <div className="bg-white h-[400px] rounded-b-lg flex items-center justify-center">
               {imagePreviewUrl ? (
-                <img src={imagePreviewUrl} className="w-full h-full object-contain" alt="Document preview" />
+                <img src={imagePreviewUrl} className="w-auto h-full object-contain" alt="Document preview" />
               ) : (
                 <div className="flex items-center justify-center text-gray-500">Loading Image...</div>
               )}
             </div>
           </div>
 
-          <div className="w-1/2 bg-white">
-            <div className="p-4">
-              <div className="text-sm text-blue-600 mb-4">Batch #1</div>
-              <div className="border rounded-lg overflow-hidden">
-                <table className="w-full text-sm">
-                  <thead className="bg-gray-50">
-                    <tr>
-                      <th className="px-4 py-2 text-left font-medium text-gray-600">ID</th>
-                      <th className="px-4 py-2 text-left font-medium text-gray-600">Balance</th>
-                      <th className="px-4 py-2 text-left font-medium text-gray-600">Page No</th>
-                      <th className="px-4 py-2 text-left font-medium text-gray-600">Transaction Date</th>
-                      <th className="px-4 py-2 text-left font-medium text-gray-600">Transaction Notes</th>
-                      <th className="px-4 py-2 text-left font-medium text-gray-600">Transaction Types</th>
-                      <th className="px-4 py-2 text-left font-medium text-gray-600">Balance Number</th>
+          {/* Table Section */}
+          <div className="w-2/3 bg-white p-4">
+            <div className="text-sm text-blue-600 mb-4">Batch #1</div>
+            <div className="border rounded-lg overflow-hidden">
+              <table className="w-full text-sm">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th className="px-4 py-2 text-left font-medium text-gray-600">ID</th>
+                    <th className="px-4 py-2 text-left font-medium text-gray-600">Balance</th>
+                    <th className="px-4 py-2 text-left font-medium text-gray-600">Page No</th>
+                    <th className="px-4 py-2 text-left font-medium text-gray-600">Transaction Date</th>
+                    <th className="px-4 py-2 text-left font-medium text-gray-600">Transaction Notes</th>
+                    <th className="px-4 py-2 text-left font-medium text-gray-600">Transaction Types</th>
+                    <th className="px-4 py-2 text-left font-medium text-gray-600">Balance Number</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {extractedData.map((row) => (
+                    <tr key={row.id} className="border-t">
+                      <td className="px-4 py-2">{row.id}</td>
+                      <td className="px-4 py-2">{row.balance}</td>
+                      <td className="px-4 py-2">{row.page_no}</td>
+                      <td className="px-4 py-2 flex items-center">
+                        {row.tx_date}
+                      </td>
+                      <td className="px-4 py-2">{row.tx_notes}</td>
+                      <td className="px-4 py-2">{row.tx_types}</td>
+                      <td className="px-4 py-2">{row.balance_number}</td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    {extractedData.map((row) => (
-                      <tr key={row.id} className="border-t">
-                        <td className="px-4 py-2">{row.id}</td>
-                        <td className="px-4 py-2">{row.balance}</td>
-                        <td className="px-4 py-2">{row.page_no}</td>
-                        <td className="px-4 py-2 flex items-center">
-                          {row.tx_date}
-                        </td>
-                        <td className="px-4 py-2">{row.tx_notes}</td>
-                        <td className="px-4 py-2">{row.tx_types}</td>
-                        <td className="px-4 py-2">{row.balance_number}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
@@ -106,9 +116,9 @@ const DocumentReviewPage = () => {
               Save
             </button>
             <Link to='/analyzed-files'>
-            <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-              Save & Go to Analytic
-            </button>
+              <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                Save & Go to Analytic
+              </button>
             </Link>
           </div>
         </div>
@@ -116,5 +126,17 @@ const DocumentReviewPage = () => {
     </SidebarLayout>
   );
 };
+
+const ProgressStep = ({ number, text, active, completed }) => (
+  <div className="flex items-center flex-1">
+    <div className={`flex items-center justify-center w-6 h-6 rounded-full 
+      ${completed ? 'bg-green-600 text-white' : active ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'}
+      text-sm`}>
+      {number}
+    </div>
+    <div className={`ml-2 text-sm ${active ? 'text-gray-900' : 'text-gray-500'}`}>{text}</div>
+    {number !== "3" && <div className="flex-1 mx-4 h-px bg-gray-200" />}
+  </div>
+);
 
 export default DocumentReviewPage;

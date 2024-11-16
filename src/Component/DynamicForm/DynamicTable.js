@@ -40,7 +40,7 @@ const DynamicTableWithPagination = () => {
         {/* Card Header */}
         <div className="flex justify-between items-center mb-4">
           <h3 className="text-lg font-semibold">Transaction Data</h3>
-          <button className="text-blue-600">Get Help</button>
+          {/* <button className="text-blue-600">Get Help</button> */}
         </div>
 
         {/* Table Description */}

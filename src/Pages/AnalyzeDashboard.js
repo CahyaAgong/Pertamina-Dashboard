@@ -84,7 +84,7 @@ const AnalyticsDashboard = () => {
             <Edit size={18} className="mr-2" /> Edit Data
           </button>
           <button className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg">
-            <BarChart2 size={18} className="mr-2" /> Set Metrics
+            <BarChart2 size={18} className="mr-2" /> Windows Dressing
           </button>
           <button className="flex items-center px-4 py-2 border border-gray-300 rounded-lg">
             <Filter size={18} className="mr-2" /> Filter
@@ -93,58 +93,70 @@ const AnalyticsDashboard = () => {
 
         {/* Profile Information */}
         <div className="p-8 bg-white rounded-lg shadow-lg border border-gray-200">
-          <div className="grid grid-cols-3 gap-8">
-            <div className="flex items-start space-x-4">
-              <img
-                src={require('../Assets/Image/bca.png')}
-                alt="BRI Logo"
-                className="w-20 h-20 object-contain"
-              />
-              <div>
-                <div className="space-y-1">
-                  <label className="text-sm text-gray-600">Name</label>
-                  <p className="font-medium">{profileData.name}</p>
-                </div>
-                <div className="mt-4 space-y-1">
-                  <label className="text-sm text-gray-600">Account Number</label>
-                  <p className="font-medium">{profileData.account_number}</p>
-                </div>
-                <div className="mt-4 space-y-1">
-                  <label className="text-sm text-gray-600">Period</label>
-                  <p className="font-medium">{profileData.period}</p>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div className="space-y-1">
-                <label className="text-sm text-gray-600">Branch</label>
-                <p className="font-medium">{profileData.branch}</p>
-              </div>
-              <div className="mt-4 space-y-1">
-                <label className="text-sm text-gray-600">Created by</label>
-                <p className="font-medium">{profileData.created_by}</p>
-              </div>
-              <div className="mt-4 space-y-1">
-                <label className="text-sm text-gray-600">Bank</label>
-                <p className="font-medium">{profileData.bank}</p>
-              </div>
-            </div>
-            <div>
-              <div className="space-y-1">
-                <label className="text-sm text-gray-600">File Uploaded</label>
-                <p className="font-medium">{profileData.file_uploaded}</p>
-              </div>
-              <div className="mt-4 space-y-1">
-                <label className="text-sm text-gray-600">Address</label>
-                <p className="font-medium">{profileData.address}</p>
-              </div>
-              <div className="mt-4 space-y-1">
-                <label className="text-sm text-gray-600">Currency</label>
-                <p className="font-medium">{profileData.currency}</p>
-              </div>
-            </div>
-          </div>
+  <div className="grid grid-cols-3 gap-8">
+    {/* Left column (company logo, name, account number, etc.) */}
+    <div className="flex items-start space-x-4">
+      <img
+        src={require('../Assets/Image/bca.png')}
+        alt="BRI Logo"
+        className="w-20 h-20 object-contain"
+      />
+      <div>
+        <div className="space-y-1">
+          <label className="text-sm text-gray-600">Name</label>
+          <p className="text-sm font-medium">{profileData.name}</p>
         </div>
+        <div className="mt-4 space-y-1">
+          <label className="text-sm text-gray-600">Account Number</label>
+          <p className="text-sm font-medium">{profileData.account_number}</p>
+        </div>
+        <div className="mt-4 space-y-1">
+          <label className="text-sm text-gray-600">Period</label>
+          <p className="text-sm font-medium">{profileData.period}</p>
+        </div>
+      </div>
+    </div>
+
+    {/* Middle column */}
+    <div>
+      <div className="space-y-1">
+        <label className="text-sm text-gray-600">Branch</label>
+        <p className="text-md font-medium">{profileData.branch}</p>
+      </div>
+      <div className="mt-4 space-y-1">
+        <label className="text-sm text-gray-600">Created by</label>
+        <p className="text-md font-medium">{profileData.created_by}</p>
+      </div>
+      <div className="mt-4 space-y-1">
+        <label className="text-sm text-gray-600">Bank</label>
+        <p className="text-md font-medium">{profileData.bank}</p>
+      </div>
+    </div>
+
+    {/* Right column (new fields in the same row) */}
+    <div className="flex flex-col space-y-1">
+      <div className="space-y-1">
+        <label className="text-sm text-gray-600">File Uploaded</label>
+        <p className="text-md font-medium">{profileData.file_uploaded}</p>  {/* Smaller font */}
+      </div>
+      <div className="mt-4 space-y-1">
+        <label className="text-sm text-gray-600">Address</label>
+        <p className="text-md font-medium">{profileData.address}</p>  {/* Smaller font */}
+      </div>
+      <div className="mt-4 space-y-1">
+        <label className="text-sm text-gray-600">Currency</label>
+        <p className="text-md font-medium">{profileData.currency}</p>  {/* Smaller font */}
+      </div>
+      {/* New field: Company Status */}
+      <div className="mt-4 space-y-1">
+        <label className="text-sm text-gray-600">Account Type</label>
+        <p className="text-md font-medium">{profileData.Account_Type}</p>  {/* Smaller font */}
+      </div>
+      {/* New field: Date Established */}
+    </div>
+  </div>
+</div>
+
 
         {/* Tabs */}
         <div className="px-4 border-b">

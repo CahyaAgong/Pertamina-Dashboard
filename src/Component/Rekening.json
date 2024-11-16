@@ -1,47 +1,46 @@
 [
-    {
-      "header": "Total Mutasi Debit",
+  {
+      "header": "Total Debit Transactions",
       "value": 553195703.74
-    },
-    {
-      "header": "Total Mutasi Kredit",
+  },
+  {
+      "header": "Total Credit Transactions",
       "value": 650000000.00
-    },
-    {
-      "header": "Frekuensi Mutasi Debit",
+  },
+  {
+      "header": "Frequency of Debit Transactions",
       "value": 7
-    },
-    {
-      "header": "Frekuensi Mutasi Kredit",
+  },
+  {
+      "header": "Frequency of Credit Transactions",
       "value": 3
-    },
-    {
-      "header": "Mutasi Debit Tertinggi",
+  },
+  {
+      "header": "Highest Debit Transaction",
       "value": 300000000.00
-    },
-    {
-      "header": "Mutasi Debit Terendah",
+  },
+  {
+      "header": "Lowest Debit Transaction",
       "value": 30000.00
-    },
-    {
-      "header": "Mutasi Kredit Tertinggi",
+  },
+  {
+      "header": "Highest Credit Transaction",
       "value": 300000000.00
-    },
-    {
-      "header": "Mutasi Kredit Terendah",
+  },
+  {
+      "header": "Lowest Credit Transaction",
       "value": 100000000.00
-    },
-    {
-      "header": "Saldo Tertinggi",
+  },
+  {
+      "header": "Highest Balance",
       "value": -430000000.45
-    },
-    {
-      "header": "Saldo Terendah",
+  },
+  {
+      "header": "Lowest Balance",
       "value": -1000000000.45
-    },
-    {
-      "header": "Saldo Rata-Rata",
+  },
+  {
+      "header": "Average Balance",
       "value": -662089856.60
-    }
-  ]
-  
+  }
+]
