@@ -62,7 +62,6 @@ const AnalyticsDashboardBalance = () => {
         <td className="px-2 py-1">{item.date}</td>
         <td className="px-2 py-1">{item.max_balance.toLocaleString()}</td>
         <td className="px-2 py-1">{item.min_balance.toLocaleString()}</td> {/* Display min_balance */}
-        {/* <td className="px-2 py-1">{(item.max_balance).toLocaleString()}</td> Display max_balance */}
         <td className="px-2 py-1 text-green-600">{dailyChangeFormatted}</td> {/* Display the daily change */}
       </tr>
     );

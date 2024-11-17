@@ -92,7 +92,7 @@ const AnalyticsDashboard = () => {
         </div>
 
         {/* Profile Information */}
-        <div className="p-8 bg-white rounded-lg shadow-lg border border-gray-200">
+        <div className="p-8 bg-white rounded-lg shadow-lg border border-gray-200 mb-4">
   <div className="grid grid-cols-3 gap-8">
     {/* Left column (company logo, name, account number, etc.) */}
     <div className="flex items-start space-x-4">

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2'; // Import Bar chart component
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js'; // Import required chart.js elements
 import { Bell, HelpCircle, Settings, Home, Upload, FileText, Layout, PieChart, Download } from 'lucide-react';
@@ -28,8 +28,27 @@ const outlierData = [
 ];
 
 const TransactionDashboard = () => {
+  
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5); // Track number of records per page
+
+  const [atmData, setAtmData] = useState({ deposits: 0, withdrawals: 0 });
+
+  useEffect(() => {
+    // Function to generate random data for cash deposits and withdrawals
+    const generateRandomData = () => {
+      const randomDeposit = (Math.random() * 1000000).toFixed(2); // Random cash deposit between 0 and 1 million
+      const randomWithdrawal = (Math.random() * 1000000).toFixed(2); // Random cash withdrawal between 0 and 1 million
+      setAtmData({ deposits: randomDeposit, withdrawals: randomWithdrawal });
+    };
+
+    generateRandomData(); // Generate random data initially
+
+    // Optional: Update the data every 5 seconds
+    const intervalId = setInterval(generateRandomData, 5000);
+
+    return () => clearInterval(intervalId); // Clean up interval on component unmount
+  }, []);
 
   // Calculate the current items to display based on the page
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -76,6 +95,13 @@ const TransactionDashboard = () => {
     setCurrentPage(1); // Reset to first page when the number of items per page changes
   };
 
+  const formatIDR = (amount) => {
+    return new Intl.NumberFormat('id-ID', {
+      currency: 'IDR',
+      minimumFractionDigits: 0,
+    }).format(amount);
+  };
+
   return (
     <div className="flex min-h-screen bg-gray-50">
       {/* Main Content */}
@@ -98,12 +124,12 @@ const TransactionDashboard = () => {
             <tbody>
               <tr className="border-b">
                 <td className="py-3 text-blue-600">Cash Deposits</td>
-                <td>0</td>
+                <td>{atmData.deposits ? formatIDR(atmData.deposits) : '-'}</td>
                 <td>-</td>
               </tr>
               <tr>
                 <td className="py-3 text-blue-600">Cash Withdrawals</td>
-                <td>0</td>
+                <td>{atmData.withdrawals ? formatIDR(atmData.withdrawals) : '-'}</td>
                 <td>-</td>
               </tr>
             </tbody>
@@ -141,8 +167,8 @@ const TransactionDashboard = () => {
                   <tr key={index} className="border-b">
                     <td className="py-3">{item.date}</td>
                     <td>{item.description}</td>
-                    <td>{item.debit.toLocaleString()}</td>
-                    <td>{item.credit.toLocaleString()}</td>
+                    <td>{item.debit === 0 ? '-' : item.debit.toLocaleString()}</td>
+                    <td>{item.credit === 0 ? '-' : item.credit.toLocaleString()}</td>
                   </tr>
                 ))}
               </tbody>
