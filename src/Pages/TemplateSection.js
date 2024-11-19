@@ -6,12 +6,14 @@ import {
 } from 'lucide-react';
 import SidebarLayout from '../Component/Sidebar/Layout';
 import { Link } from 'react-router-dom';
+import HeaderProfile from '../Component/Card/HeaderProfile';
 
 const TemplateSelectionPage = () => {
   return (
     <SidebarLayout>
       {/* Main Content */}
       <div className="flex-1 p-8 bg-[#F3F4F6]">
+        <HeaderProfile/>
         {/* Card Wrapper for the entire content */}
         <div className="bg-white p-6 rounded-lg border border-[#E5E7EB] shadow-lg space-y-8">
           {/* Header */}

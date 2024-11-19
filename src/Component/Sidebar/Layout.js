@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
-  Bell, Home, Upload, FileText, Layout, PieChart, Settings, BarChart, Database, Shield, LifeBuoy
+  Bell, Home, Upload, FileText, Layout, PieChart, Settings, BarChart, Database, Shield, LifeBuoy,
+  ChevronLeft, ChevronRight  // Import the necessary icons for toggling
 } from 'lucide-react';
 
 const SidebarLayout = ({ children }) => {
@@ -24,18 +25,18 @@ const SidebarLayout = ({ children }) => {
   };
 
   const menuItems = [
-    { to: "/", label: "Dashboard" },
-    { to: "/scanned-files", label: "Document Processing" },
-    { to: "/upload", label: "Upload Documents" },
-    { to: "/upload/:document/processed-file", label: "Processed Files" },
-    { to: "/template-hub", label: "Template Hub" },
-    { to: "/analyzed-files", label: "Analysis" },
-    { to: "/credit-analysis", label: "Credit Analysis" },
-    { to: "/bank-statement", label: "Bank Statement" },
-    { to: "/financial-report", label: "Financial Reports" },
-    { to: "/security", label: "Security" },
-    { to: "/help-Center", label: "Help Center" },
-    { to: "/settings", label: "Settings" },
+    { to: "/", label: "Dashboard", disabled: false },
+    { to: "/scanned-files", label: "Document Processing", disabled: false },
+    { to: "/upload", label: "Upload Documents", disabled: false },
+    { to: "/upload/:document/processed-file", label: "Processed Files", disabled: true },
+    { to: "/template-hub", label: "Template Hub", disabled: true },
+    { to: "/analyzed-files", label: "Analysis", disabled: false },
+    { to: "/credit-analysis", label: "Credit Analysis", disabled: true },
+    { to: "/bank-statement", label: "Bank Statement", disabled: true },
+    { to: "/financial-report", label: "Financial Reports", disabled: true },
+    { to: "/security", label: "Security", disabled: true },
+    { to: "/help-Center", label: "Help Center", disabled: true },
+    { to: "/settings", label: "Settings", disabled: false },
   ];
 
   return (
@@ -56,18 +57,30 @@ const SidebarLayout = ({ children }) => {
 
         <nav className="mt-4">
           {menuItems.map((item) => (
-            <Link
-              key={item.label}
-              to={item.to}
-              className={`flex items-center space-x-2 px-4 py-2 cursor-pointer ${
-                location.pathname === item.to
-                  ? 'bg-[#EFF6FF] text-[#1E3A8A]'
-                  : 'text-[#6B7280] hover:bg-[#F3F4F6]'
-              }`}
-            >
-              {iconMap[item.label]}
-              <span className={`${isSidebarCollapsed ? 'hidden' : ''}`}>{item.label}</span>
-            </Link>
+            item.disabled ? (
+              // Disabled item, render as div with cursor-not-allowed
+              <div
+                key={item.label}
+                className={`flex items-center space-x-2 px-4 py-2 cursor-not-allowed text-[#1E3A8A] hover:bg-[#F3F4F6]`} // Keep default color
+              >
+                {iconMap[item.label]}
+                <span className={`${isSidebarCollapsed ? 'hidden' : ''}`}>{item.label}</span>
+              </div>
+            ) : (
+              // Active (clickable) link
+              <Link
+                key={item.label}
+                to={item.to}
+                className={`flex items-center space-x-2 px-4 py-2 cursor-pointer ${
+                  location.pathname === item.to
+                    ? 'bg-[#EFF6FF] text-[#1E3A8A]'
+                    : 'text-[#1E3A8A] hover:bg-[#F3F4F6] hover:text-[#1E3A8A]'
+                }`}
+              >
+                {iconMap[item.label]}
+                <span className={`${isSidebarCollapsed ? 'hidden' : ''}`}>{item.label}</span>
+              </Link>
+            )
           ))}
         </nav>
 
@@ -76,7 +89,7 @@ const SidebarLayout = ({ children }) => {
             className="flex items-center justify-center w-10 h-10 bg-[#1E3A8A] text-white rounded-full"
             onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
           >
-            {isSidebarCollapsed ? '>' : '<'}
+            {isSidebarCollapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
           </button>
         </div>
       </div>

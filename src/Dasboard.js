@@ -56,7 +56,7 @@ const Dashboard = () => {
           {/* New Solution Card */}
           <SolutionCard
             icon="📈"
-            title="Automated Document Review"
+            title="Document Review"
             description="Automatically analyze and review documents for errors, inconsistencies, and key information."
             buttonText="Start Reviewing"
             link="/scanned-files"
@@ -84,7 +84,7 @@ const Dashboard = () => {
         </div>
 
         {/* Graph or Progress Section */}
-        <div className="bg-white p-6 rounded-lg shadow-lg mb-8">
+        {/* <div className="bg-white p-6 rounded-lg shadow-lg mb-8">
           <h3 className="text-lg font-semibold text-[#333333] mb-4">System Performance</h3>
           <div className="flex items-center justify-between">
             <div className="w-full h-2 bg-gray-200 rounded-full">
@@ -92,7 +92,7 @@ const Dashboard = () => {
             </div>
             <span className="ml-2 text-sm text-gray-600">75% Capacity</span>
           </div>
-        </div>
+        </div> */}
       </div>
     </SidebarLayout>
   );

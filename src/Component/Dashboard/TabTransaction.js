@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import { Info } from 'lucide-react';
 import transactionData from '../Rekening.json'; // Ensure this file contains valid data
 import FraudData from '../Transaction.json'; // Ensure this file contains valid data
+import TransactionDetail from '../DynamicForm/TransactionDetail';
+import RekeningDetail from '../JSON/RekeningKoran.json'
 
 const AnalyticsTransaction = () => {
   const creditTransactionTotal = transactionData.find(item => item.header === 'Total Credit Transactions')?.value || 0;
   const debitTransactionTotal = transactionData.find(item => item.header === 'Total Debit Transactions')?.value || 0;
+  
   // State to manage fraud alerts and visibility of the fraud section
   const [fraudAlerts, setFraudAlerts] = useState([]);
   const [isFraudDetected, setIsFraudDetected] = useState(false);
@@ -78,66 +81,53 @@ const AnalyticsTransaction = () => {
           {/* Fraud Detection Section */}
           <Section
             title="Fraud Detection"
-            description="We identified multiple issues concerning the uploaded files. Please note that these files might contain fraudulent information which requires your immediate attention."
+            description="We have detected several issues with the uploaded files. Please be aware that these files may contain potentially fraudulent data, which requires your prompt attention."
             icon={<Info size={16} />}
           >
-            {!isFraudDetected && (
-              <div className="text-center mb-4">
-                <button
-                  onClick={detectFraud}
-                  className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700"
-                >
-                  Detect Fraud
-                </button>
-              </div>
-            )}
-
             {/* Display Fraud Alerts or No Fraud Message */}
-            {fraudAlerts.length > 0 ? (
-              <div>
-                <table className="w-full table-auto border-collapse mt-4">
-                  <thead className="bg-gray-50">
-                    <tr>
-                      <th className="px-4 py-2 text-left">NO</th>
-                      <th className="px-4 py-2 text-left">DATE</th>
-                      <th className="px-4 py-2 text-left">DESCRIPTION</th>
-                      <th className="px-4 py-2 text-left">Transaction</th>
-                      <th className="px-4 py-2 text-left">FRAUD INDICATOR</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {displayedFraudAlerts.map((alert, index) => (
-                      <tr key={index}>
-                        <td className="px-4 py-2">{(page - 1) * itemsPerPage + index + 1}</td>
-                        <td className="px-4 py-2">{alert.transaction.date}</td>
-                        <td className="px-4 py-2">{alert.transaction.description}</td>
-                        <td className="px-4 py-2">{alert.transaction.balance || "N/A"}</td>
-                        <td className="px-4 py-2 text-red-600">{alert.message}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+            <div>
+              <table className="w-full table-auto border-collapse mt-4">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th className="px-4 py-2 text-left">NO</th>
+                    <th className="px-4 py-2 text-left">INDICATOR</th>
+                    <th className="px-4 py-2 text-left">RESULT</th>
+                    <th className="px-4 py-2 text-left">FILE</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { indicator: "PDF Creator", value: "Microsoft Reporting Services 13.0.0.0" },
+                    { indicator: "Account Number", value: "34001099204508" },
+                    { indicator: "Admin Charge", value: "Charge on 2023 july 20" },
+                    { indicator: "Atm Withdrawal", value: "there is no atm Withdrawal in This file" },
+                    { indicator: "RTGS transfer", value: "there is no RTGS transfer in This file" },
+                    { indicator: "Ending Balance", value: "No Odd Ending Balance Nominal found" }
+                  ].map((row, index) => {
+                    // Random File Names
+                    const randomFile = `raw_statement/${Math.floor(Math.random() * 100000000000000000)}.pdf`;
 
-                {/* Pagination */}
-                <div className="flex justify-center space-x-2 mt-4">
-                  <button
-                    onClick={() => handlePageChange(page - 1)}
-                    disabled={page === 1}
-                    className="bg-gray-300 text-gray-600 px-4 py-2 rounded-lg"
-                  >
-                    Previous
-                  </button>
-                  <span className="px-4 py-2 text-gray-600">Page {page}</span>
-                  <button
-                    onClick={() => handlePageChange(page + 1)}
-                    disabled={page * itemsPerPage >= fraudAlerts.length}
-                    className="bg-gray-300 text-gray-600 px-4 py-2 rounded-lg"
-                  >
-                    Next
-                  </button>
-                </div>
-              </div>
-            ) : null}
+                    return (
+                      <tr key={index}>
+                        <td className="px-4 py-2">{index + 1}</td>
+                        <td className="px-4 py-2">{row.indicator}</td>
+                        <td className="px-4 py-2">{row.value}</td>
+                        <td className="px-4 py-2">
+                          <a
+                            href={`/${randomFile}`} // Link to the file
+                            className="text-blue-500 hover:text-blue-700"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {randomFile}
+                          </a>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
           </Section>
 
           {/* Transaction Summary Section */}
@@ -162,35 +152,7 @@ const AnalyticsTransaction = () => {
             title="Transaction Detail"
             icon={<Info size={16} />}
           >
-            <div className="grid grid-cols-2 gap-8">
-              {/* Credit Transactions */}
-              <div className="bg-white p-6 rounded-lg shadow-lg border border-gray-200">
-                <h3 className="font-medium mb-2">Credit Transaction Breakdown</h3>
-                <p className="text-sm text-gray-500 mb-4">Total revenue breakdown based on available data</p>
-                <div className="relative w-48 h-48 mx-auto">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-center">
-                      <div className="text-2xl font-bold">{creditTransactionTotal.toLocaleString()}</div>
-                      <div className="text-sm text-gray-500">Total</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Debit Transactions */}
-              <div className="bg-white p-6 rounded-lg shadow-lg border border-gray-200">
-                <h3 className="font-medium mb-2">Debit Transaction Breakdown</h3>
-                <p className="text-sm text-gray-500 mb-4">Overall cost breakdown based on available data</p>
-                <div className="relative w-48 h-48 mx-auto">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-center">
-                      <div className="text-2xl font-bold">{debitTransactionTotal.toLocaleString()}</div>
-                      <div className="text-sm text-gray-500">Total</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <TransactionDetail data={RekeningDetail}/>
           </Section>
         </div>
       </div>
@@ -215,7 +177,7 @@ const SummaryCard = ({ title, value, textColor = "text-gray-900" }) => (
   <div className="w-full">
     <div className="flex flex-col">
       <div className="text-sm text-gray-600">{title}</div>
-      <div className={`text-lg font-medium ${textColor} text-center`}>
+      <div className={`text-lg font-medium ${textColor}`}>
         {value}
       </div>
     </div>

@@ -6,6 +6,7 @@ import {
   HelpCircle, ChevronRight, Bell
 } from 'lucide-react';
 import SidebarLayout from '../Component/Sidebar/Layout';
+import HeaderProfile from '../Component/Card/HeaderProfile';
 
 const SettingsPage = () => {
   return (
@@ -13,18 +14,13 @@ const SettingsPage = () => {
 
       {/* Main Content */}
       <div className="flex-1 p-8">
+        <HeaderProfile/>
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
           <div className="flex items-center space-x-2 text-sm text-gray-600">
             <span>Dashboard</span>
             <ChevronRight size={16} />
             <span className="text-gray-900">Settings</span>
-          </div>
-          <div className="flex items-center space-x-4">
-            <span className="text-gray-600">WV</span>
-            <span>Superuser</span>
-            <span>EN</span>
-            <Bell size={20} />
           </div>
         </div>
 

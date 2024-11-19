@@ -5,6 +5,7 @@ import {
   Trash2, Filter, Edit, BarChart2,
   Info, ChevronRight, FileUp
 } from 'lucide-react';
+import HeaderProfile from '../Component/Card/HeaderProfile';
 import SidebarLayout from '../Component/Sidebar/Layout';
 import AnalyticsDashboardBalance from '../Component/Dashboard/Balance';
 import TransactionDashboard from '../Component/Dashboard/Transaction';
@@ -16,7 +17,7 @@ import AnalyticsTransaction from '../Component/Dashboard/TabTransaction';
 import profileData from '../Component/Profile.json'
 
 const AnalyticsDashboard = () => {
-  const [activeTab, setActiveTab] = useState("Transaction"); // Track active tab
+  const [activeTab, setActiveTab] = useState("Transaction Summary"); // Track active tab
 
   // Data for the charts
   const pieData = {
@@ -65,17 +66,18 @@ const AnalyticsDashboard = () => {
     <SidebarLayout>
       {/* Main Content */}
       <div className="flex-1">
+        <HeaderProfile/>
         {/* Breadcrumb */}
         <div className="flex items-center space-x-2 px-4 py-2 text-sm">
-          <span>Dashboard</span>
+          <span>Analysis</span>
           <ChevronRight size={16} />
-          <span>Detail Profile</span>
+          <span>{activeTab}</span>
         </div>
 
         {/* Action Buttons */}
         <div className="px-4 py-2 flex justify-end space-x-2">
           <button className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg">
-            <FileUp size={18} className="mr-2" /> Export to PDF/XLS
+            <FileUp size={18} className="mr-2" /> Export to XLS
           </button>
           <button className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg">
             <Download size={18} className="mr-2" /> Export Raw Data
@@ -161,32 +163,34 @@ const AnalyticsDashboard = () => {
         {/* Tabs */}
         <div className="px-4 border-b">
           <div className="flex space-x-8">
-            <TabItem text="Transaction" active={activeTab === 'Transaction'} onClick={() => handleTabChange('Transaction')} />
+            <TabItem text="Transaction Summary" active={activeTab === 'Transaction Summary'} onClick={() => handleTabChange('Transaction Summary')} />
             <TabItem text="Balance Overview" active={activeTab === 'Balance Overview'} onClick={() => handleTabChange('Balance Overview')} />
-            <TabItem text="Transaction Behavior" active={activeTab === 'Transaction Behavior'} onClick={() => handleTabChange('Transaction Behavior')} />
+            <TabItem text="Transaction Analysis" active={activeTab === 'Transaction Behavior'} onClick={() => handleTabChange('Transaction Behavior')} />
             <TabItem text="Merchant Analysis" active={activeTab === 'Merchant Analysis'} onClick={() => handleTabChange('Merchant Analysis')} />
           </div>
         </div>
 
         {/* Conditional Rendering of Content based on Active Tab */}
         <div className="p-4 space-y-6">
-          {activeTab === "Balance Overview" && <AnalyticsDashboardBalance />}
-          {activeTab === "Transaction" && (
-            <>
-              <AnalyticsTransaction />
-              <div className="flex space-x-4">
-                <div className="flex-1">
-                  <DynamicLineChart />
-                </div>
-                <div className="flex-1">
-                  <DynamicBarChart />
-                </div>
-              </div>
-            </>
-          )}
-          {activeTab === "Transaction Behavior" && <TransactionDashboard />}
-          {activeTab === "Merchant Analysis" && <MerchantDashboard />}
+  {activeTab === "Balance Overview" && <AnalyticsDashboardBalance />}
+  {activeTab === "Transaction Summary" && (
+    <>
+      <AnalyticsTransaction />
+      {/* Use block layout for separate rows */}
+      <div className="space-y-4">
+        <div className="flex-1">
+          <DynamicLineChart />
         </div>
+        <div className="flex-1">
+          <DynamicBarChart />
+        </div>
+      </div>
+    </>
+  )}
+  {activeTab === "Transaction Behavior" && <TransactionDashboard />}
+  {activeTab === "Merchant Analysis" && <MerchantDashboard />}
+</div>
+
       </div>
     </SidebarLayout>
   );

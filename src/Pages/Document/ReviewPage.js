@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import SidebarLayout from '../../Component/Sidebar/Layout';
 import { ChevronLeft, Bell } from 'lucide-react';
+import HeaderProfile from '../../Component/Card/HeaderProfile';
 
 const DocumentReviewPage = () => {
   const location = useLocation();  // Access the location object to get the file from state
@@ -28,9 +29,9 @@ const DocumentReviewPage = () => {
     <SidebarLayout>
       <div className="flex-1 flex flex-col">
         {/* Progress Steps */}
+      <HeaderProfile/>
 
-
-        <div className="p-4 bg-white border-b flex justify-between items-center">
+        <div className="p-4">
           <div className="flex items-center space-x-2">
             <ChevronLeft className="text-gray-500" size={20} />
             <span className="text-gray-500">Upload</span>
@@ -104,12 +105,7 @@ const DocumentReviewPage = () => {
         {/* Footer Actions */}
         <div className="border-t bg-white p-4 flex justify-between items-center">
           <div className="flex space-x-2">
-            <button className="px-4 py-2 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50">
-              Previous
-            </button>
-            <button className="px-4 py-2 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50">
-              Next
-            </button>
+
           </div>
           <div className="flex space-x-2">
             <button className="px-4 py-2 text-blue-600 border border-blue-600 rounded-lg hover:bg-blue-50">
@@ -117,7 +113,7 @@ const DocumentReviewPage = () => {
             </button>
             <Link to='/analyzed-files'>
               <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-                Save & Go to Analytic
+                Save & Go to Analysis
               </button>
             </Link>
           </div>

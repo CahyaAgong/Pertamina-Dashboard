@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';  // Import useNavigate for navigation
 import { CloudUpload, ChevronLeft, Bell } from 'lucide-react';
 import SidebarLayout from '../Component/Sidebar/Layout';
+import HeaderProfile from '../Component/Card/HeaderProfile';
 
 const UploadPage = () => {
   const { document } = useParams(); // Retrieve the dynamic document parameter
@@ -54,7 +55,8 @@ const UploadPage = () => {
   return (
     <SidebarLayout>
       <div className="flex-1 p-8">
-        <div className="p-6 bg-white border border-gray-300 shadow-sm">
+        <HeaderProfile />
+        <div className="p-6 ">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-2">
               <button className="flex items-center text-gray-600 hover:text-gray-900">
@@ -86,7 +88,7 @@ const UploadPage = () => {
                   onChange={(e) => setUploadType(e.target.value)}
                 >
                   <option value="single-bank-upload">Single Bank Upload</option>
-                  <option value="multi-bank-upload">Multi Bank Upload</option>
+                  {/* <option value="multi-bank-upload">Multi Bank Upload</option> */}
                 </select>
               </div>
             </div>
@@ -164,7 +166,7 @@ const UploadPage = () => {
                   onClick={handleGoToDocumentProcessing} // Navigate to DocumentProcessingPage
                   className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
                 >
-                  Go to Document Processing
+                  Proccess Document
                 </button>
               </div>
             </div>

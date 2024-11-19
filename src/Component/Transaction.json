@@ -3,8 +3,8 @@
       "date": "01/05",
       "description": "SALDO AWAL",
       "branch": "",
-      "mutation": "30,000.00 DB",
-      "balance": "-468,041,422.19"
+      "mutation": "0",
+      "balance": "-564,845,718.45"
     },
     {
       "date": "02/05",
@@ -71,7 +71,7 @@
     },
     {
       "date": "31/05",
-      "description": "BIAYA ADM SALDO AWAL :",
+      "description": "BIAYA ADM",
       "branch": "-564,845,718.45",
       "mutation": "30,000.00 DB",
       "balance": "-564,845,718.45"

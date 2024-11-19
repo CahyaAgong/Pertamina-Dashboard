@@ -3,6 +3,7 @@ import { jsPDF } from 'jspdf';
 import SidebarLayout from '../Component/Sidebar/Layout';
 import { Link } from 'react-router-dom';
 import { Search, Filter, ChevronLeft, ChevronRight } from 'lucide-react';
+import HeaderProfile from '../Component/Card/HeaderProfile';
 
 const ScannedFilesPage = () => {
   // Dummy file data
@@ -70,6 +71,7 @@ const ScannedFilesPage = () => {
     <SidebarLayout>
       {/* Main Content */}
       <div className="flex-1 p-8">
+        <HeaderProfile/>
         {/* Header */}
         <div className="flex justify-between items-center mb-6">
           <div className="flex items-center space-x-2 text-gray-600">

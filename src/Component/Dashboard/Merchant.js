@@ -24,30 +24,30 @@ const MerchantDashboard = () => {
                 <thead>
                   <tr className="text-left">
                     <th className="pb-4">MERCHANT</th>
-                    <th className="pb-4"># OF TRANSACTION</th>
-                    <th className="pb-4">AMOUNT</th>
+                    <th className="pb-4 text-right"># OF TRANSACTION</th>
+                    <th className="pb-4 text-right">AMOUNT</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td className="py-2 text-blue-600">NINA NURSITA</td>
-                    <td>4</td>
-                    <td>4.126.200</td>
+                    <td className="pl-10 text-right">4</td>
+                    <td className="text-right">4.126.200</td>
                   </tr>
                   <tr>
                     <td className="py-2 text-blue-600">RESLA PUTR</td>
-                    <td>1</td>
-                    <td>116.500</td>
+                    <td className="text-right">1</td>
+                    <td className="text-right">116.500</td>
                   </tr>
                   <tr>
                     <td className="py-2 text-blue-600">HAFIZH RAFIZ</td>
-                    <td>1</td>
-                    <td>100.000</td>
+                    <td className="text-right">1</td>
+                    <td className="text-right">100.000</td>
                   </tr>
                   <tr>
                     <td className="py-2 text-blue-600">NURDELA ARDI</td>
-                    <td>1</td>
-                    <td>65.000</td>
+                    <td className="text-right">1</td>
+                    <td className="text-right">65.000</td>
                   </tr>
                 </tbody>
               </table>
@@ -67,25 +67,25 @@ const MerchantDashboard = () => {
                 <thead>
                   <tr className="text-left">
                     <th className="pb-4">MERCHANT</th>
-                    <th className="pb-4"># OF TRANSACTION</th>
-                    <th className="pb-4">AMOUNT</th>
+                    <th className="pb-4 text-right"># OF TRANSACTION</th>
+                    <th className="pb-4 text-right">AMOUNT</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td className="py-2 text-blue-600">NONE</td>
-                    <td>38</td>
-                    <td>2.877.045</td>
+                    <td className="text-right">38</td>
+                    <td className="text-right">2.877.045</td>
                   </tr>
                   <tr>
                     <td className="py-2 text-blue-600">CENAIDA</td>
-                    <td>6</td>
-                    <td>327.500</td>
+                    <td className="text-right">6</td>
+                    <td className="text-right">327.500</td>
                   </tr>
                   <tr>
                     <td className="py-2 text-blue-600">BNINDIA</td>
-                    <td>2</td>
-                    <td>122.500</td>
+                    <td className="text-right">2</td>
+                    <td className="text-right">122.500</td>
                   </tr>
                 </tbody>
               </table>

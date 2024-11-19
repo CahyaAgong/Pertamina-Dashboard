@@ -3,6 +3,7 @@ import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import SidebarLayout from '../../Component/Sidebar/Layout';
 import { ChevronLeft, Bell } from 'lucide-react';
 import { Document, Page, pdfjs } from 'react-pdf';  // Import pdfjs from react-pdf
+import HeaderProfile from '../../Component/Card/HeaderProfile';
 
 // Set worker source for pdf.js (before rendering)
 pdfjs.GlobalWorkerOptions.workerSrc = 'https://unpkg.com/pdfjs-dist@2.10.377/build/pdf.worker.min.js';
@@ -73,7 +74,8 @@ const DocumentProcessingPage = () => {
   return (
     <SidebarLayout>
       <div className="flex-1">
-        <div className="p-4 bg-white border-b flex justify-between items-center">
+        <HeaderProfile/>
+        <div className="p-4  flex justify-between items-center">
           <div className="flex items-center space-x-4">
             <button className="flex items-center text-gray-600 hover:text-gray-900">
               <ChevronLeft size={20} />
@@ -89,7 +91,7 @@ const DocumentProcessingPage = () => {
             <ProgressStep number="3" text="Relabel Results" />
           </div>
         </div>
-
+        {/* change this into Proccessing data */}
         <div className="flex h-[calc(100vh-140px)]">
           <div className="w-72 border-r bg-white p-4">
             <div className="space-y-6">
@@ -132,6 +134,7 @@ const DocumentProcessingPage = () => {
             </div>
           </div>
         </div>
+        {/* End Process */}
 
         {/* Full-Width Card with Button on the Far Right */}
         <div className="mt-0">
