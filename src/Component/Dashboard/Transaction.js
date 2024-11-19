@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Bar } from 'react-chartjs-2'; // Import Bar chart component
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js'; // Import required chart.js elements
-import { Bell, HelpCircle, Settings, Home, Upload, FileText, Layout, PieChart, Download } from 'lucide-react';
+// import { format } from 'date-fns'; // Untuk format tanggal jika perlu
+import DetailKriteria from '../JSON/DetailKriteria.json';
 
 // Register chart.js components
 ChartJS.register(
@@ -13,22 +14,38 @@ ChartJS.register(
   Legend
 );
 
-// Your original JSON data
-const outlierData = [
-  { "Date": "01/05", "KETERANGAN": "SALDO AWAL", "MUTASI": null, "SALDO": "-564,845,718.45" },
-  { "Date": "02/05", "KETERANGAN": "TRSF E-BANKING DB 0205/FTSCY/WS90671 135154282.00 PEMBAYARAN PAJAK", "MUTASI": "135,154,282.00 DB", "SALDO": "-700,000,000.45" },
-  { "Date": "03/05", "KETERANGAN": "TRSF E-BANKING DB 0205/FTSCY/WS90671  300000000.00 DENDA", "MUTASI": "300,000,000.00 DB", "SALDO": "-1,000,000,000.45" },
-  { "Date": "06/05", "KETERANGAN": "TRSF E-BANKING DB 0205/FTSCY/WS90671  100000000.00 bkl HENRY S H", "MUTASI": "100,000,000.00", "SALDO": "-900,000,000.45" },
-  { "Date": "13/05", "KETERANGAN": "TRSF E-BANKING DB 0205/FTSCY/WS90671  TANGGAL :12/05 50000000.00 HENRY S H", "MUTASI": "50,000,000.00 DB", "SALDO": "-950,000,000.45" },
-  { "Date": "21/05", "KETERANGAN": "TRSF E-BANKING DB 0205/FTSCY/WS90671   300000000.00 rk ka HENRY S H", "MUTASI": "300,000,000.00", "SALDO": null },
-  { "Date": "22/05", "KETERANGAN": "TRSF E-BANKING DB 0205/FTSCY/WS90671   250000000.00 Adidas", "MUTASI": "250,000,000.00", "SALDO": "-430,000,000.45" },
-  { "Date": "24/05", "KETERANGAN": "TRSF E-BANKING DB 0205/FTSCY/WS90671   30000000.00 rk gn HENRY S H", "MUTASI": "30,000,000.00 DB", "SALDO": "-460,000,000.45" },
-  { "Date": "27/05", "KETERANGAN": "PEMBAYARAN PINJ. 2588390000 BUNGA KREDIT LOKAL", "MUTASI": "8,011,421.74 DB", "SALDO": "-468,011,422.19" },
-  { "Date": "31/05", "KETERANGAN": "BIAYA ADM ", "MUTASI": "30,000.00 DB", "SALDO": "-468,041,422.19" }
-];
+// Fungsi untuk mengambil bagian yang relevan dari KETERANGAN
+const extractKeterangan = (keterangan) => {
+  const regex = /(PEMBAYARAN PAJAK|DENDA|BUNGA KREDIT LOKAL|BIAYA ADM)/i; // Daftar kata yang relevan
+  const match = keterangan.match(regex); // Mencocokkan dengan regex
+  return match ? match[0] : keterangan; // Kembalikan hasil yang cocok, atau seluruh string jika tidak ada yang cocok
+}
 
-// Filter only ATM-related transactions based on a simple condition
-const filteredAtmTransactions = outlierData.filter(item => item.MUTASI !== null);
+// Filter hanya transaksi yang sesuai dengan kata kunci
+const filteredAtmTransactions = DetailKriteria.filter(item => 
+  item.KETERANGAN && (
+    item.KETERANGAN.includes("BUNGA KREDIT LOKAL") ||
+    item.KETERANGAN.includes("BIAYA ADM") ||
+    item.KETERANGAN.includes("PEMBAYARAN PAJAK") ||
+    item.KETERANGAN.includes("DENDA")
+  )
+);
+
+// Mengelompokkan transaksi berdasarkan KETERANGAN dan menghitung total MUTASI untuk setiap kategori
+const groupedByKeterangan = filteredAtmTransactions.reduce((acc, item) => {
+  const keterangan = extractKeterangan(item.KETERANGAN); // Ambil KETERANGAN yang sudah difilter
+  const mutasi = item.MUTASI ? parseFloat(item.MUTASI.replace(/[^0-9.-]+/g, "")) : 0; // Ambil nilai MUTASI, pastikan ini adalah angka
+
+  if (!acc[keterangan]) {
+    acc[keterangan] = 0; // Jika kategori belum ada, inisialisasi dengan 0
+  }
+  acc[keterangan] += mutasi; // Tambahkan nilai MUTASI ke kategori yang sesuai
+
+  return acc;
+}, {});
+
+const chartLabels = Object.keys(groupedByKeterangan); // Kategorinya (KETERANGAN)
+const chartData = Object.values(groupedByKeterangan); // Total mutasi untuk setiap kategori
 
 // TransactionDashboard component
 const TransactionDashboard = () => {
@@ -54,6 +71,15 @@ const TransactionDashboard = () => {
     }).format(amount);
   };
 
+  // Safely parse MUTASI to prevent errors from null or invalid data
+  const safeParseMutasi = (mutasi) => {
+    if (mutasi && typeof mutasi === 'string') {
+      const amount = mutasi.split(" ")[0].replace(/,/g, ''); // Extract the numeric part
+      return parseFloat(amount) || 0; // Return 0 if parsing fails
+    }
+    return 0; // Default to 0 if MUTASI is null or invalid
+  };
+
   return (
     <div className="flex min-h-screen bg-gray-50">
       {/* Main Content */}
@@ -74,8 +100,10 @@ const TransactionDashboard = () => {
             <tbody>
               {currentItems.map((item, index) => (
                 <tr key={index} className="border-b">
-                  <td className="py-3 text-blue-600">{item.KETERANGAN}</td>
-                  <td>{formatIDR(item.MUTASI)}</td>
+                  <td className="py-3 text-blue-600">{extractKeterangan(item.KETERANGAN)}</td>
+                  <td>
+                    {item.MUTASI ? '-'+formatIDR(safeParseMutasi(item.MUTASI)) : "-"}
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -95,32 +123,33 @@ const TransactionDashboard = () => {
 
         {/* Bar Chart for Debit/Credit Analysis */}
         <div className="bg-white p-6 rounded-lg shadow-lg">
-          <h3 className="text-lg font-semibold mb-4">Debit and Credit Amounts by Date</h3>
-          <Bar data={{
-            labels: filteredAtmTransactions.map(item => item.Date), // Dates as x-axis labels
-            datasets: [
-              {
-                label: 'Debit Amount',
-                data: filteredAtmTransactions.map(item => parseFloat(item.MUTASI.split(" ")[0].replace(/,/g, ''))), // Extract debit amount from MUTASI field
+          <h3 className="text-lg font-semibold mb-4">Transaction Amounts by Category</h3>
+          <Bar 
+            data={{
+              labels: chartLabels, // Keterangan sebagai label pada sumbu X
+              datasets: [{
+                label: 'Total Amount',
+                data: chartData, // Data jumlah untuk setiap kategori KETERANGAN
                 backgroundColor: 'rgba(75, 192, 192, 0.2)', // Bar color
                 borderColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 1,
-              },
-            ],
-          }} options={{
-            responsive: true,
-            plugins: {
-              title: {
-                display: true,
-                text: 'Debit and Credit Transactions by Date'
-              },
-              tooltip: {
-                callbacks: {
-                  label: (context) => `${context.dataset.label}: ${context.raw.toLocaleString()} IDR`
+              }]
+            }} 
+            options={{
+              responsive: true,
+              plugins: {
+                title: {
+                  display: true,
+                  text: 'Transaction Amounts by Category'
+                },
+                tooltip: {
+                  callbacks: {
+                    label: (context) => `${context.dataset.label}: ${context.raw.toLocaleString()} IDR`
+                  }
                 }
               }
-            }
-          }} />
+            }} 
+          />
         </div>
       </div>
     </div>

@@ -165,8 +165,8 @@ const AnalyticsDashboard = () => {
           <div className="flex space-x-8">
             <TabItem text="Transaction Summary" active={activeTab === 'Transaction Summary'} onClick={() => handleTabChange('Transaction Summary')} />
             <TabItem text="Balance Overview" active={activeTab === 'Balance Overview'} onClick={() => handleTabChange('Balance Overview')} />
-            <TabItem text="Transaction Analysis" active={activeTab === 'Transaction Behavior'} onClick={() => handleTabChange('Transaction Behavior')} />
-            <TabItem text="Merchant Analysis" active={activeTab === 'Merchant Analysis'} onClick={() => handleTabChange('Merchant Analysis')} />
+            <TabItem text="Transaction Analysis" active={activeTab === 'Transaction Analysis'} onClick={() => handleTabChange('Transaction Analysis')} />
+            <TabItem text="Financial Analysis" active={activeTab === 'Financial Analysis'} onClick={() => handleTabChange('Financial Analysis')} />
           </div>
         </div>
 
@@ -187,8 +187,8 @@ const AnalyticsDashboard = () => {
       </div>
     </>
   )}
-  {activeTab === "Transaction Behavior" && <TransactionDashboard />}
-  {activeTab === "Merchant Analysis" && <MerchantDashboard />}
+  {activeTab === "Transaction Analysis" && <TransactionDashboard />}
+  {activeTab === "Financial Analysis" && <MerchantDashboard />}
 </div>
 
       </div>

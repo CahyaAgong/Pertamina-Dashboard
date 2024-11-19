@@ -64,14 +64,14 @@ const DynamicBarChart = () => {
       labels: labels,
       datasets: [
         {
-          label: 'Min Debit',
+          label: 'Debit',
           data: minDebitData,
           backgroundColor: 'rgba(255, 99, 132, 0.6)', // Red for Min Debit
           borderColor: 'rgba(255, 99, 132, 1)',
           borderWidth: 1,
         },
         {
-          label: 'Max Credit',
+          label: 'Credit',
           data: maxCreditData,
           backgroundColor: 'rgba(54, 162, 235, 0.6)', // Blue for Max Credit
           borderColor: 'rgba(54, 162, 235, 1)',
@@ -100,7 +100,7 @@ const DynamicBarChart = () => {
       x: {
         title: {
           display: true,
-          text: 'Date (Tanggal)',  // Label for x-axis
+          text: 'Date',  // Label for x-axis
         }
       },
       y: {

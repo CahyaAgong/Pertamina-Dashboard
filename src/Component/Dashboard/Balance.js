@@ -32,11 +32,42 @@ const AnalyticsDashboardBalance = () => {
   const lowestBalance = parseSafeFloat(analysisKoran.find(item => item.Description && item.Description.trim() === "Saldo Terendah")?.["Value "]);
   const avgBalance = parseSafeFloat(analysisKoran.find(item => item.Description && item.Description.trim() === "Saldo Rata-Rata")?.["Value "]);
 
+  const formatCurrencyIDR = (value) => {
+    if (!value || isNaN(value)) return '0.00'; // Ensure value is a valid number
+    // Format the value as IDR (Indonesian Rupiah) with commas and two decimal places
+    return parseFloat(value).toLocaleString('id-ID', {
+      style: 'currency',
+      currency: 'IDR',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).replace('IDR', '').trim(); // Remove the "IDR" prefix if you don't want it
+  };
+  
   // Process data for chart rendering
-  const chartData = balanceData.map(item => ({
-    date: item.date,
-    balance: parseSafeFloat(item.balance) // Convert balance to a number
-  }));
+  // Process data for chart rendering
+const chartData = balanceData
+.sort((a, b) => new Date(a.date) - new Date(b.date))  // Sort by date ascending (earliest first)
+.reduce((acc, current) => {
+  const balance = parseSafeFloat(current.balance);
+
+  // Skip the entry if balance is empty or invalid
+  if (balance === 0 && current.balance.trim() === '') {
+    return acc; // Skip invalid balance entries
+  }
+
+  // Use the last valid balance if the current balance is empty
+  if (balance === 0 && acc.length > 0) {
+    current.balance = acc[acc.length - 1].balance; // Assign the last valid balance
+  }
+
+  acc.push({
+    date: current.date,
+    balance: parseSafeFloat(current.balance)
+  });
+
+  return acc;
+}, []);
+
 
   // Ensure valid data for the chart
   const isValidData = chartData.length > 0 && chartData.every(item => item.balance !== undefined);
@@ -59,7 +90,20 @@ const AnalyticsDashboardBalance = () => {
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="date" tick={{ fontSize: 10 }} />
                     <YAxis tick={{ fontSize: 10 }} />
-                    <Tooltip />
+                    <Tooltip 
+                      content={({ payload }) => {
+                        if (payload && payload.length) {
+                          const value = payload[0].value; // Get the balance value
+                          return (
+                            <div className="custom-tooltip">
+                              <p>{`Date: ${payload[0].payload.date}`}</p>
+                              <p>{`Balance: ${formatCurrencyIDR(value.toFixed(2))}`}</p>
+                            </div>
+                          );
+                        }
+                        return null;
+                      }}
+                    />
                     <Line type="monotone" dataKey="balance" stroke="#2563eb" strokeWidth={2} />
                   </LineChart>
                 </ResponsiveContainer>
@@ -105,22 +149,25 @@ const AnalyticsDashboardBalance = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {balanceData.map((item, index) => {
-                    const mutationFormatted = formatCurrency(item.mutation);
-                    const openingBalanceFormatted = formatCurrency(item.balance);
-                    // Get the closing balance as the balance from the next row
-                    const closingBalanceFormatted = formatCurrency(
-                      (balanceData[index + 1]?.balance) ? balanceData[index + 1]?.balance : item.balance
-                    );
-                    return (
-                      <tr key={index} className="border-t">
-                        <td className="px-2 py-1 text-right">{item.date}</td>
-                        <td className="px-2 py-1">{item.description}</td>
-                        <td className="px-2 py-1 text-right">{openingBalanceFormatted}</td>
-                        <td className="px-2 py-1 text-right">{closingBalanceFormatted}</td>
-                      </tr>
-                    );
-                  })}
+                  {balanceData
+                    .sort((a, b) => new Date(a.date) - new Date(b.date))  // Sort data by date ascending
+                    .map((item, index) => {
+                      const openingBalanceFormatted = formatCurrency(item.balance);
+
+                      // Closing balance is the next day's balance
+                      const closingBalanceFormatted = formatCurrency(
+                        balanceData[index + 1]?.balance ? balanceData[index + 1]?.balance : item.balance
+                      );
+
+                      return (
+                        <tr key={index} className="border-t">
+                          <td className="px-2 py-1 text-right">{item.date}</td>
+                          <td className="px-2 py-1">{item.description}</td>
+                          <td className="px-2 py-1 text-right">{openingBalanceFormatted}</td>
+                          <td className="px-2 py-1 text-right">{closingBalanceFormatted}</td>
+                        </tr>
+                      );
+                    })}
                 </tbody>
               </table>
             </div>
