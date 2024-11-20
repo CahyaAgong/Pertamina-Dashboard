@@ -10,6 +10,7 @@ import FileAnalysisDashboard from './Pages/AnalyzeFile';
 import AnalyticsDashboard from './Pages/AnalyzeDashboard';
 import DocumentProcessingPage from './Pages/Document/ProccesPage';
 import DocumentReviewPage from './Pages/Document/ReviewPage';
+import WindowHome from './Pages/WindowDressing/WindowHome';
 
 // Components for different routes
 
@@ -26,6 +27,7 @@ function App() {
           <Route path="/upload/:document/processed-file" element={<DocumentProcessingPage />} />
           <Route path="/upload/:document/processed-file/review-file" element={<DocumentReviewPage />} />
           <Route path="/analyzed-files" element={<AnalyticsDashboard />} />
+          <Route path="/window-dressing" element={<WindowHome />} />
         </Routes>
       </div>
     </Router>

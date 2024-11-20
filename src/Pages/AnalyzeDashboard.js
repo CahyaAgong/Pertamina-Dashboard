@@ -5,6 +5,7 @@ import {
   Trash2, Filter, Edit, BarChart2,
   Info, ChevronRight, FileUp
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import HeaderProfile from '../Component/Card/HeaderProfile';
 import SidebarLayout from '../Component/Sidebar/Layout';
 import AnalyticsDashboardBalance from '../Component/Dashboard/Balance';
@@ -85,9 +86,11 @@ const AnalyticsDashboard = () => {
           <button className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg">
             <Edit size={18} className="mr-2" /> Edit Data
           </button>
+          <Link to ='/window-dressing'>
           <button className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg">
             <BarChart2 size={18} className="mr-2" /> Windows Dressing
           </button>
+          </Link>
           <button className="flex items-center px-4 py-2 border border-gray-300 rounded-lg">
             <Filter size={18} className="mr-2" /> Filter
           </button>

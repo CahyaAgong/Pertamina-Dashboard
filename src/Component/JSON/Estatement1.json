@@ -1,0 +1,83 @@
+[
+    {
+        "Date": "01-Jun",
+        "Detail": "SALDO AWAL",
+        "transaction": null,
+        "balance": "291,025.54",
+        "name": "JENNY N",
+        "accountNum": "4270098997",
+        "address ": "JL CEMPAKA NO 1A JAKARTA PUSAT 12710"
+    },
+    {
+        "Date": "02-Jun",
+        "Detail": "TRSF E-BANKING CR",
+        "transaction": "4,000,000",
+        "balance": "4,291,025.54",
+        "name": "JENNY N",
+        "accountNum": "4270098997",
+        "address ": "JL CEMPAKA NO 1A JAKARTA PUSAT 12711"
+    },
+    {
+        "Date": "02-Jun",
+        "Detail": "TRSF E-BANKING DB",
+        "transaction": "1,604,460.00 DB",
+        "balance": null,
+        "name": "JENNY N",
+        "accountNum": "4270098997",
+        "address ": "JL CEMPAKA NO 1A JAKARTA PUSAT 12712"
+    },
+    {
+        "Date": "02-Jun",
+        "Detail": "TRSF E-BANKING DB",
+        "transaction": "1,548,000.00 DB",
+        "balance": "1,138,565.54",
+        "name": "JENNY N",
+        "accountNum": "4270098997",
+        "address ": "JL CEMPAKA NO 1A JAKARTA PUSAT 12713"
+    },
+    {
+        "Date": "03-Jun",
+        "Detail": "SETORAN TUNAI",
+        "transaction": "17,500,000.00",
+        "balance": "18,638,565.54",
+        "name": "JENNY N",
+        "accountNum": "4270098997",
+        "address ": "JL CEMPAKA NO 1A JAKARTA PUSAT 12714"
+    },
+    {
+        "Date": "04-Jun",
+        "Detail": "TRSF E-BANKING CR",
+        "transaction": "38,400,000.00",
+        "balance": null,
+        "name": "JENNY N",
+        "accountNum": "4270098997",
+        "address ": "JL CEMPAKA NO 1A JAKARTA PUSAT 12715"
+    },
+    {
+        "Date": "04-Jun",
+        "Detail": "TRSF E-BANKING CR",
+        "transaction": "1,000,000.00",
+        "balance": null,
+        "name": "JENNY N",
+        "accountNum": "4270098997",
+        "address ": "JL CEMPAKA NO 1A JAKARTA PUSAT 12716"
+    },
+    {
+        "Date": "04-Jun",
+        "Detail": "TRSF E-BANKING DB",
+        "transaction": "1,591,436.00 DB",
+        "balance": null,
+        "name": "JENNY N",
+        "accountNum": "4270098997",
+        "address ": "JL CEMPAKA NO 1A JAKARTA PUSAT 12717"
+    },
+    {
+        "Date": "04-Jun",
+        "Detail": "TRSF E-BANKING DB",
+        "transaction": "1,139,000.00 DB",
+        "balance": "55,308,129.54",
+        "name": "JENNY N",
+        "accountNum": "4270098997",
+        "address ": "JL CEMPAKA NO 1A JAKARTA PUSAT 12718"
+    }
+]

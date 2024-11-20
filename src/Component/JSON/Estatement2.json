@@ -1,0 +1,128 @@
+[
+    {
+        "Date": "01-Jun",
+        "Detail": "SALDO AWAL",
+        "transaction": null,
+        "balance": "6,497,723.29",
+        "name": "Yontaro",
+        "accountNum": "8205100002",
+        "address ": "JL SEI NO 3 P"
+    },
+    {
+        "Date": "03-Jun",
+        "Detail": "TRSF E-BANKING DB",
+        "transaction": "165,000.00 DB",
+        "balance": "6,332,723.29",
+        "name": "Yontaro",
+        "accountNum": "8205100002",
+        "address ": "JL SEI NO 3 P"
+    },
+    {
+        "Date": "03-Jun",
+        "Detail": "TARIKAN ATM 03/06",
+        "transaction": "2,500,000.00 DB",
+        "balance": "3,832,723.29",
+        "name": "Yontaro",
+        "accountNum": "8205100002",
+        "address ": "JL SEI NO 3 P"
+    },
+    {
+        "Date": "04-Jun",
+        "Detail": "SETORAN VIA CDM",
+        "transaction": "10,000,000.00",
+        "balance": null,
+        "name": "Yontaro",
+        "accountNum": "8205100002",
+        "address ": "JL SEI NO 3 P"
+    },
+    {
+        "Date": "04-Jun",
+        "Detail": "SETORAN VIA CDM",
+        "transaction": "9,800,000.00",
+        "balance": null,
+        "name": "Yontaro",
+        "accountNum": "8205100002",
+        "address ": "JL SEI NO 3 P"
+    },
+    {
+        "Date": "04-Jun",
+        "Detail": "SETORAN VIA CDM",
+        "transaction": "9,700,000.00",
+        "balance": null,
+        "name": "Yontaro",
+        "accountNum": "8205100002",
+        "address ": "JL SEI NO 3 P"
+    },
+    {
+        "Date": "04-Jun",
+        "Detail": "SETORAN VIA CDM",
+        "transaction": "9,900,000.00",
+        "balance": null,
+        "name": "Yontaro",
+        "accountNum": "8205100002",
+        "address ": "JL SEI NO 3 P"
+    },
+    {
+        "Date": "04-Jun",
+        "Detail": "SETORAN VIA CDM",
+        "transaction": "1,591,436.00 DB",
+        "balance": null,
+        "name": "Yontaro",
+        "accountNum": "8205100002",
+        "address ": "JL SEI NO 3 P"
+    },
+    {
+        "Date": "04-Jun",
+        "Detail": "TRSF E-BANKING DB",
+        "transaction": "4,400,000.00 DB",
+        "balance": null,
+        "name": "Yontaro",
+        "accountNum": "8205100002",
+        "address ": "JL SEI NO 3 P"
+    },
+    {
+        "Date": "04-Jun",
+        "Detail": "SWITCHING DB",
+        "transaction": "16,100,000.00 DB",
+        "balance": null,
+        "name": "Yontaro",
+        "accountNum": "8205100002",
+        "address ": "JL SEI NO 3 P"
+    },
+    {
+        "Date": "04-Jun",
+        "Detail": "SWITCHING DB",
+        "transaction": "6,500.00 DB",
+        "balance": null,
+        "name": "Yontaro",
+        "accountNum": "8205100002",
+        "address ": "JL SEI NO 3 P"
+    },
+    {
+        "Date": "04-Jun",
+        "Detail": "BYR VIA E-BANKING",
+        "transaction": "6,139,347.00 DB",
+        "balance": null,
+        "name": "Yontaro",
+        "accountNum": "8205100002",
+        "address ": "JL SEI NO 3 P"
+    },
+    {
+        "Date": "04-Jun",
+        "Detail": "BYR VIA E-BANKING",
+        "transaction": "3,501,120.00 DB",
+        "balance": null,
+        "name": "Yontaro",
+        "accountNum": "8205100002",
+        "address ": "JL SEI NO 3 P"
+    },
+    {
+        "Date": "04-Jun",
+        "Detail": "TRSF E-BANKING DB",
+        "transaction": "1,001,000.00 DB",
+        "balance": "22,084,756.29",
+        "name": "Yontaro",
+        "accountNum": "8205100002",
+        "address ": "JL SEI NO 3 P"
+    }
+]
