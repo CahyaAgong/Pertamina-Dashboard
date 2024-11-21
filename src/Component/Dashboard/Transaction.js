@@ -16,7 +16,7 @@ ChartJS.register(
 
 // Fungsi untuk mengambil bagian yang relevan dari KETERANGAN
 const extractKeterangan = (keterangan) => {
-  const regex = /(PEMBAYARAN PAJAK|DENDA|BUNGA KREDIT LOKAL|BIAYA ADM)/i; // Daftar kata yang relevan
+  const regex = /(PEMBAYARAN PAJAK|DENDA|BUNGA KREDIT LOKAL|BIAYA ADM|SANITIZER|PLN PREPAID|OBAT|PAJAK)/i; // Daftar kata yang relevan
   const match = keterangan.match(regex); // Mencocokkan dengan regex
   return match ? match[0] : keterangan; // Kembalikan hasil yang cocok, atau seluruh string jika tidak ada yang cocok
 }
@@ -27,7 +27,8 @@ const filteredAtmTransactions = DetailKriteria.filter(item =>
     item.KETERANGAN.includes("BUNGA KREDIT LOKAL") ||
     item.KETERANGAN.includes("BIAYA ADM") ||
     item.KETERANGAN.includes("PEMBAYARAN PAJAK") ||
-    item.KETERANGAN.includes("DENDA")
+    item.KETERANGAN.includes("PAJAK")
+
   )
 );
 
@@ -102,7 +103,7 @@ const TransactionDashboard = () => {
                 <tr key={index} className="border-b">
                   <td className="py-3 text-blue-600">{extractKeterangan(item.KETERANGAN)}</td>
                   <td>
-                    {item.MUTASI ? '-'+formatIDR(safeParseMutasi(item.MUTASI)) : "-"}
+                    {item.MUTASI ? formatIDR(safeParseMutasi(item.MUTASI)) : "-"}
                   </td>
                 </tr>
               ))}

@@ -6,18 +6,14 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const TransactionDetail = ({ data }) => {
-  // Function to safely convert values to numbers after cleaning strings (removing commas, currency symbols)
+  // Function to safely convert values to numbers (assuming data is already clean)
   const parseValue = (value) => {
-    if (typeof value === 'string') {
-      // Remove all non-numeric characters except the decimal point and minus sign
-      return parseFloat(value.replace(/[^\d.-]/g, '')) || 0;
-    }
-    return value || 0;
+    return value || 0; // In case of null or undefined, return 0
   };
 
   // Extracting transaction data from JSON, ensuring proper trimming of spaces around the keys
-  const frequencyDebit = parseInt(data.find(item => item.Description.trim() === "Frekuensi Mutasi Debit")?.["Value "] || 0);
-  const frequencyCredit = parseInt(data.find(item => item.Description.trim() === "Frekuensi Mutasi Kredit")?.["Value "] || 0);
+  const frequencyDebit = parseInt(data.find(item => item.Description.trim() === "Debit Transaction Frequency")?.["Value"] || 0);
+  const frequencyCredit = parseInt(data.find(item => item.Description.trim() === "Credit Transaction Frequency")?.["Value"] || 0);
 
   // Total for normalization (if needed for percentage calculation)
   const total = frequencyDebit + frequencyCredit;

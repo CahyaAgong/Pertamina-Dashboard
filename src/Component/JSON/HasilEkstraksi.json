@@ -1,0 +1,268 @@
+[
+    {
+        "date": "01/06",
+        "description": "SALDO AWAL",
+        "branch": null,
+        "mutation": null,
+        "balance": "6,497,723.29"
+    },
+    {
+        "date": "03/06",
+        "description": "TRSF E-BANKING DB 03/06 /95031 BAUT VERONA R",
+        "branch": null,
+        "mutation": "165,000.00 DB",
+        "balance": "6,332,723.29"
+    },
+    {
+        "date": "03/06",
+        "description": "TARIKAN ATM 03/06",
+        "branch": null,
+        "mutation": "2,500,000.00 DB",
+        "balance": "3,832,723.29"
+    },
+    {
+        "date": "04/06",
+        "description": "SETORAN VIA CDM 04/06 YONTORO",
+        "branch": null,
+        "mutation": "10,000,000.00",
+        "balance": ""
+    },
+    {
+        "date": "04/06",
+        "description": "SETORAN VIA CDM 04/06 WSID:Z7VN1 YONTORO",
+        "branch": null,
+        "mutation": "10,000,000.00",
+        "balance": ""
+    },
+    {
+        "date": "04/06",
+        "description": "SETORAN VIA CDM 04/06 WSID:Z7VN1 YONTORO",
+        "branch": null,
+        "mutation": "9,800,000.00",
+        "balance": ""
+    },
+    {
+        "date": "04/06",
+        "description": "SETORAN VIA CDM 04/06 WSID:Z7VN1 YONTORO",
+        "branch": null,
+        "mutation": "9,700,000.00",
+        "balance": ""
+    },
+    {
+        "date": "04/06",
+        "description": "SETORAN VIA CDM 04/06 WSID:Z7VN1 YONTORO",
+        "branch": null,
+        "mutation": "9,900,000.00",
+        "balance": ""
+    },
+    {
+        "date": "04/06",
+        "description": "TRSF E-BANKING DB 04/06 /95031/0000 DEWI",
+        "branch": null,
+        "mutation": "4,400,000.00 DB",
+        "balance": ""
+    },
+    {
+        "date": "04/06",
+        "description": "SWITCHING DB TRANSFER   KE 016 YONTORO",
+        "branch": null,
+        "mutation": "16,100,000.00 DB",
+        "balance": ""
+    },
+    {
+        "date": "04/06",
+        "description": "KARTU KREDIT 0623 WSID BCA CARD YONTORO",
+        "branch": null,
+        "mutation": "6,500.00 DB",
+        "balance": ""
+    },
+    {
+        "date": "04/06",
+        "description": "BYR VIA E-BANKING 04/06  WSID KK DBS EX ANZ YONTORO",
+        "branch": null,
+        "mutation": "6,139,347.00 DB",
+        "balance": ""
+    },
+    {
+        "date": "04/06",
+        "description": "BYR VIA E-BANKING 04/06  BNI YONTORO",
+        "branch": null,
+        "mutation": "3,501,120.00 DB",
+        "balance": ""
+    },
+    {
+        "date": "04/06",
+        "description": "TRSF E-BANKING DB GO-PAY CUSTO",
+        "branch": null,
+        "mutation": "1,001,000.00 DB",
+        "balance": "22,084,756.29"
+    },
+    {
+        "date": "05/06",
+        "description": "TRSF E-BANKING DB TANGGAL :04/06 TOKOPEDIA",
+        "branch": null,
+        "mutation": "483,100.00 DB",
+        "balance": ""
+    },
+    {
+        "date": "05/06",
+        "description": "SWITCHING DB TRANSFER   KE 008 EVA OKTAVIA",
+        "branch": null,
+        "mutation": "2,400,000.00 DB",
+        "balance": ""
+    },
+    {
+        "date": "05/06",
+        "description": "SWITCHING DB TRANSFER   KE 008 EVA OKTAVIA",
+        "branch": null,
+        "mutation": "6,500.00 DB",
+        "balance": ""
+    },
+    {
+        "date": "05/06",
+        "description": "SWITCHING DB TRANSFER   KE 008  YUSRA",
+        "branch": null,
+        "mutation": "3,900,000.00 DB",
+        "balance": "15,295,156.29"
+    },
+    {
+        "date": "05/06",
+        "description": "SWITCHING DB TRANSFER   KE 008 YUSRA",
+        "branch": null,
+        "mutation": "6,500.00 DB",
+        "balance": "15,288,656.29"
+    },
+    {
+        "date": "05/06",
+        "description": "SWITCHING DB TRANSFER KE 008 INDRA",
+        "branch": null,
+        "mutation": "1,700,000.00 DB",
+        "balance": ""
+    },
+    {
+        "date": "05/06",
+        "description": "SWITCHING DB TRANSFER KE 008 INDRA",
+        "branch": null,
+        "mutation": "6,500.00 DB",
+        "balance": ""
+    },
+    {
+        "date": "05/06",
+        "description": "SWITCHING DB TRANSFER KE 008 MUNZIR",
+        "branch": null,
+        "mutation": "1,700,000.00 DB",
+        "balance": ""
+    },
+    {
+        "date": "05/06",
+        "description": "SWITCHING DB TRANSFER KE 008 MUNZIR",
+        "branch": null,
+        "mutation": "6,500.00 DB",
+        "balance": ""
+    },
+    {
+        "date": "05/06",
+        "description": "TRSF E-BANKING DB 05/06 JANTO",
+        "branch": null,
+        "mutation": "1,500,000.00 DB",
+        "balance": ""
+    },
+    {
+        "date": "05/06",
+        "description": "SWITCHING DB TRANSFER KE 002 SULASNI",
+        "branch": null,
+        "mutation": "1,900,000.00 DB",
+        "balance": ""
+    },
+    {
+        "date": "05/06",
+        "description": "SWITCHING DB TRANSFER KE 002 SULASNI",
+        "branch": null,
+        "mutation": "6,500.00 DB",
+        "balance": ""
+    },
+    {
+        "date": "05/06",
+        "description": "SWITCHING DB TRANSFER KE 009 SDR EDY",
+        "branch": null,
+        "mutation": "2,000,000.00 DB",
+        "balance": ""
+    },
+    {
+        "date": "05/06",
+        "description": "SWITCHING DB TRANSFER KE 009 SDR EDY",
+        "branch": null,
+        "mutation": "6,500.00 DB",
+        "balance": ""
+    },
+    {
+        "date": "05/06",
+        "description": "TRSF E-BANKING DB 05/06 OBAT Susanti",
+        "branch": null,
+        "mutation": "822,000.00 DB",
+        "balance": "5,640,656.29"
+    },
+    {
+        "date": "08/06",
+        "description": "TRSF E-BANKING DB 08/06 /95031/00000 MELATI",
+        "branch": null,
+        "mutation": "725,000.00 DB",
+        "balance": "4,915,656.29"
+    },
+    {
+        "date": "09/06",
+        "description": "SWITCHING DB TRANSFER KE 503 YONTORO",
+        "branch": null,
+        "mutation": "1,000,000.00 DB",
+        "balance": ""
+    },
+    {
+        "date": "09/06",
+        "description": "SWITCHING DB TRANSFER KE 503 YONTORO",
+        "branch": null,
+        "mutation": "6,500.00 DB",
+        "balance": ""
+    },
+    {
+        "date": "09/06",
+        "description": "TRSF E-BANKING DB 09/06 JANTI",
+        "branch": null,
+        "mutation": "670,000.00 DB",
+        "balance": ""
+    },
+    {
+        "date": "09/06",
+        "description": "SWITCHING DB TRANSFER KE 002 SULASNI",
+        "branch": null,
+        "mutation": "3,000,000.00 DB",
+        "balance": "239,156.29"
+    },
+    {
+        "date": "09/06",
+        "description": "SWITCHING DB TRANSFER KE 002 SULASNI",
+        "branch": null,
+        "mutation": "6,500.00 DB",
+        "balance": "232,656.29"
+    },
+    {
+        "date": "09/06",
+        "description": "BYR VIA E-BANKING 09/06 PLN PREPAID YONTORO",
+        "branch": null,
+        "mutation": "102,500.00 DB",
+        "balance": "130,156.29"
+    },
+    {
+        "date": "11/06",
+        "description": "TRSF E-BANKING CR 11/06 SANITIZER",
+        "branch": null,
+        "mutation": "550,000.00",
+        "balance": "680,156.29"
+    },
+    {
+        "date": "15/06",
+        "description": "TARIKAN ATM 13/06",
+        "branch": null,
+        "mutation": "500,000.00 DB",
+        "balance": ""
+    }
+]

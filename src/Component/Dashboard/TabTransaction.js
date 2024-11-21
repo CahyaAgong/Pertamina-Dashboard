@@ -3,11 +3,9 @@ import { Info } from 'lucide-react';
 import transactionData from '../Rekening.json'; // Ensure this file contains valid data
 import FraudData from '../Transaction.json'; // Ensure this file contains valid data
 import TransactionDetail from '../DynamicForm/TransactionDetail';
-import RekeningDetail from '../JSON/RekeningKoran.json'
+import RekeningDetail from '../JSON/AnalisaRekeningKoran.json'
 
 const AnalyticsTransaction = () => {
-  const creditTransactionTotal = transactionData.find(item => item.header === 'Total Credit Transactions')?.value || 0;
-  const debitTransactionTotal = transactionData.find(item => item.header === 'Total Debit Transactions')?.value || 0;
   
   // State to manage fraud alerts and visibility of the fraud section
   const [fraudAlerts, setFraudAlerts] = useState([]);
@@ -136,11 +134,11 @@ const AnalyticsTransaction = () => {
             icon={<Info size={16} />}
           >
             <div className="grid grid-cols-4 gap-8">
-              {transactionData.map((item, index) => (
+              {RekeningDetail.map((item, index) => (
                 <SummaryCard
                   key={index}
-                  title={item.header}
-                  value={item.value.toLocaleString()}
+                  title={item.Description}
+                  value={item.Value.toLocaleString()}
                   textColor={item.textColor || "text-gray-900"}
                 />
               ))}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Info } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import balanceData from '../Transaction.json'; // Importing the new JSON data
+import balanceData from '../JSON/HasilEkstraksi.json'; // Importing the new JSON data
 import analysisKoran from '../JSON/AnalisaRekeningKoran.json'
 
 // Utility function to safely parse a string and return a default value (0 if invalid)
@@ -19,7 +19,7 @@ const parseSafeFloat = (value) => {
   const parsedValue = parseFloat(cleanedValue);
 
   // Log the parsed value to ensure it is correct
-  console.log('Parsed value:', parsedValue);
+  // console.log('Parsed value:', parsedValue);
 
   return isNaN(parsedValue) ? 0 : parsedValue;
 };
@@ -28,10 +28,28 @@ const AnalyticsDashboardBalance = () => {
   // Extract the static data from the JSON, trim spaces from the key names
   const totalDebit = parseSafeFloat(analysisKoran.find(item => item.Description && item.Description.trim() === "Total Mutasi Debit")?.["Value "]);
   const totalCredit = parseSafeFloat(analysisKoran.find(item => item.Description && item.Description.trim() === "Total Mutasi Kredit")?.["Value "]);
-  const highestBalance = parseSafeFloat(analysisKoran.find(item => item.Description && item.Description.trim() === "Saldo Tertinggi")?.["Value "]);
-  const lowestBalance = parseSafeFloat(analysisKoran.find(item => item.Description && item.Description.trim() === "Saldo Terendah")?.["Value "]);
-  const avgBalance = parseSafeFloat(analysisKoran.find(item => item.Description && item.Description.trim() === "Saldo Rata-Rata")?.["Value "]);
+  
+ 
+  // console.log(avgBalance,'Average Balance')
+  const getBalanceStatistic = (description) => {
+    // Log the balanceStats to check if the JSON is being parsed correctly
+    console.log('Balance Stats:', analysisKoran);  // <-- Check the structure in the console
+  
+    // Search for the description in the balanceStats JSON array
+    const stat = analysisKoran.find(item => item.Description && item.Description.trim() === description.trim());
+    console.log(stat, 'statss')
+    // Log the found stat for debugging
+    console.log(`Found stat for ${description}:`, stat);
+  
+    // If the stat exists, parse the value, otherwise return 0
+    return stat.Value
+  };
 
+  // Get the dynamic values from the JSON
+  const avgBalance = getBalanceStatistic("Average Balance");
+  const highestBalance = getBalanceStatistic("Highest Balance");
+  const lowestBalance = getBalanceStatistic("Lowest Balance");
+  // console.log(avgBalance,'averages')
   const formatCurrencyIDR = (value) => {
     if (!value || isNaN(value)) return '0.00'; // Ensure value is a valid number
     // Format the value as IDR (Indonesian Rupiah) with commas and two decimal places
@@ -42,31 +60,36 @@ const AnalyticsDashboardBalance = () => {
       maximumFractionDigits: 2,
     }).replace('IDR', '').trim(); // Remove the "IDR" prefix if you don't want it
   };
-  
+
   // Process data for chart rendering
-  // Process data for chart rendering
-const chartData = balanceData
-.sort((a, b) => new Date(a.date) - new Date(b.date))  // Sort by date ascending (earliest first)
-.reduce((acc, current) => {
-  const balance = parseSafeFloat(current.balance);
+  const chartData = balanceData
+    .sort((a, b) => new Date(a.date) - new Date(b.date))  // Sort by date ascending (earliest first)
+    .reduce((acc, current) => {
+      const balance = parseSafeFloat(current.balance);
 
-  // Skip the entry if balance is empty or invalid
-  if (balance === 0 && current.balance.trim() === '') {
-    return acc; // Skip invalid balance entries
-  }
+      // Skip invalid balance entries
+      if (balance === 0 && current.balance.trim() === '') {
+        return acc;
+      }
 
-  // Use the last valid balance if the current balance is empty
-  if (balance === 0 && acc.length > 0) {
-    current.balance = acc[acc.length - 1].balance; // Assign the last valid balance
-  }
+      // If the current date is the same as the previous one, update only the balance
+      if (acc.length > 0 && acc[acc.length - 1].date === current.date) {
+        acc[acc.length - 1] = {
+          ...acc[acc.length - 1],
+          balance: parseSafeFloat(current.balance),  // Update the balance with the latest value
+          description: current.description,  // Update description to the latest one
+        };
+      } else {
+        // Otherwise, add the new entry
+        acc.push({
+          date: current.date,
+          balance: parseSafeFloat(current.balance),
+          description: current.description,
+        });
+      }
 
-  acc.push({
-    date: current.date,
-    balance: parseSafeFloat(current.balance)
-  });
-
-  return acc;
-}, []);
+      return acc;
+    }, []);
 
 
   // Ensure valid data for the chart
@@ -114,64 +137,76 @@ const chartData = balanceData
           </Section>
 
           <Section title="Balance Statistics" icon={<Info size={16} />}>
-            <div className="grid grid-cols-4 gap-6">
-              <SummaryCard
-                title="Average Balance"
-                value={formatCurrency(avgBalance.toFixed(2))}
-              />
-              <SummaryCard
-                title="Highest Balance"
-                value={formatCurrency(highestBalance.toFixed(2))}
-                textColor="text-green-600"
-              />
-              <SummaryCard
-                title="Lowest Balance"
-                value={formatCurrency(lowestBalance.toFixed(2))}
-                textColor="text-red-600"
-              />
-              <SummaryCard
-                title="Balance Growth"
-                value={getBalanceGrowth(chartData)}
-                textColor="text-green-600"
-              />
-            </div>
-          </Section>
+          <div className="grid grid-cols-4 gap-6">
+            <SummaryCard
+              title="Average Balance"
+              value={formatCurrency(avgBalance.toFixed(2))}
+            />
+            <SummaryCard
+              title="Highest Balance"
+              value={formatCurrency(highestBalance.toFixed(2))}
+              textColor="text-green-600"
+            />
+            <SummaryCard
+              title="Lowest Balance"
+              value={formatCurrency(lowestBalance.toFixed(2))}
+              textColor="text-green-600"
+            />
+            {/* <SummaryCard
+              title="Balance Growth"
+              value={getBalanceGrowth(chartData)}
+              textColor="text-green-600"
+            /> */}
+          </div>
+        </Section>
 
-          <Section title="Daily Balance" icon={<Info size={16} />}>
-            <div className="overflow-x-auto">
-              <table className="w-full text-xs">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th className="px-2 py-1 text-right">Date</th>
-                    <th className="px-2 py-1 text-left">Description</th>
-                    <th className="px-2 py-1 text-right">Opening Balance</th>
-                    <th className="px-2 py-1 text-right">Closing Balance</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {balanceData
-                    .sort((a, b) => new Date(a.date) - new Date(b.date))  // Sort data by date ascending
-                    .map((item, index) => {
-                      const openingBalanceFormatted = formatCurrency(item.balance);
+        <Section title="Daily Balance" icon={<Info size={16} />}>
+  <div className="overflow-x-auto">
+    <table className="w-full text-xs">
+      <thead className="bg-gray-50">
+        <tr>
+          <th className="px-2 py-1 text-right">Date</th>
+          <th className="px-2 py-1 text-left">Description</th>
+          <th className="px-2 py-1 text-right">Opening Balance</th>
+          <th className="px-2 py-1 text-right">Closing Balance</th>
+        </tr>
+      </thead>
+      <tbody>
+        {balanceData
+          .filter(item => parseSafeFloat(item.balance) !== 0 && item.balance.trim() !== '')  // Filter out zero or empty balance entries
+          .sort((a, b) => new Date(a.date) - new Date(b.date)) // Sort by date ascending
+          .reduce((acc, item, index, arr) => {
+            // If it's the last entry for a given date (most recent), add it to the accumulator
+            if (!acc.some(accItem => accItem.date === item.date)) {
+              acc.push(item);  // Add the item to accumulator (it's the last entry for this date)
+            }
+            return acc;
+          }, []) // Reduce to unique dates with the latest balance data
+          .map((item, index, arr) => {
+            // Opening balance is the previous day's closing balance, or the current day's balance if it's the first day
+            const openingBalance = index === 0 ? item.balance : arr[index - 1].balance;
 
-                      // Closing balance is the next day's balance
-                      const closingBalanceFormatted = formatCurrency(
-                        balanceData[index + 1]?.balance ? balanceData[index + 1]?.balance : item.balance
-                      );
+            // Closing balance is the current day's balance
+            const closingBalance = item.balance;
 
-                      return (
-                        <tr key={index} className="border-t">
-                          <td className="px-2 py-1 text-right">{item.date}</td>
-                          <td className="px-2 py-1">{item.description}</td>
-                          <td className="px-2 py-1 text-right">{openingBalanceFormatted}</td>
-                          <td className="px-2 py-1 text-right">{closingBalanceFormatted}</td>
-                        </tr>
-                      );
-                    })}
-                </tbody>
-              </table>
-            </div>
-          </Section>
+            // Format the balances for display
+            const openingBalanceFormatted = formatCurrency(openingBalance);
+            const closingBalanceFormatted = formatCurrency(closingBalance);
+
+            return (
+              <tr key={index} className="border-t">
+                <td className="px-2 py-1 text-right">{item.date}</td>
+                <td className="px-2 py-1">{item.description}</td>
+                <td className="px-2 py-1 text-right">{openingBalanceFormatted}</td>
+                <td className="px-2 py-1 text-right">{closingBalanceFormatted}</td>
+              </tr>
+            );
+          })}
+      </tbody>
+    </table>
+  </div>
+</Section>
+
         </div>
       </div>
     </>
@@ -184,32 +219,26 @@ const formatCurrency = (value) => {
   return value.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
 };
 
-// Utility function to calculate average balance
-const getAverageBalance = (data) => {
-  const total = data.reduce((sum, item) => sum + item.balance, 0);
-  const average = total / data.length;
-  return formatCurrency(average.toFixed(2));
-};
-
-// Utility function to get highest balance
-const getHighestBalance = (data) => {
-  const highest = Math.max(...data.map(item => item.balance));
-  return formatCurrency(highest.toFixed(2));
-};
-
-// Utility function to get lowest balance
-const getLowestBalance = (data) => {
-  const lowest = Math.min(...data.map(item => item.balance));
-  return formatCurrency(lowest.toFixed(2));
-};
-
 // Utility function to calculate balance growth
+// Utility function to calculate balance growth (Highest Balance - Lowest Balance)
 const getBalanceGrowth = (data) => {
-  const firstBalance = data[0].balance;
-  const lastBalance = data[data.length - 1].balance;
-  const growth = ((lastBalance - firstBalance) / firstBalance) * 100;
-  return `${growth.toFixed(2)}%`;
+  if (data.length === 0) {
+    return '0.00';  // Return 0 if no data is available
+  }
+
+  // Extract all balance values
+  const balances = data.map(item => parseSafeFloat(item.balance));
+
+  // Get the highest and lowest balances
+  const highestBalance = Math.max(...balances);
+  const lowestBalance = Math.min(...balances);
+
+  // Calculate the balance growth as the difference
+  const growth = highestBalance - lowestBalance;
+  
+  return `${growth.toFixed(2)}`;
 };
+
 
 const Section = ({ title, description, icon, children }) => (
   <div className="bg-white rounded-lg p-4 shadow-lg">

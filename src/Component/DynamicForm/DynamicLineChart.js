@@ -19,11 +19,11 @@ const DynamicLineChart = () => {
     }]
   });
 
-  // Function to format numbers as IDR without rounding and showing all decimals
+  // Function to format numbers as IDR without rounding
   const formatIDR = (number) => {
     return new Intl.NumberFormat('id-ID', {
       minimumFractionDigits: 2,  // Ensure at least two decimal places
-      maximumFractionDigits: 20  // Allow up to 20 decimal places
+      maximumFractionDigits: 2  // Ensure no more than two decimal places
     }).format(number);
   };
 
@@ -32,45 +32,55 @@ const DynamicLineChart = () => {
     const balanceData = [];
     const dateBalanceMap = {};
 
-    // Process the data
+    // Ambil semua tanggal dari data
     data.forEach(item => {
       const date = item.TANGGAL;
-      let balance = item.SALDO;
+      let balance = item.MUTASI;
 
-      // Check if 'SALDO' exists and is a string before processing
-      if (date && balance && typeof balance === 'string') {
-        // Clean the balance: remove commas and trim spaces, then parse to float
-        balance = parseFloat(balance.trim().replace(',', ''));
-
-        // Check if balance is valid and store the latest balance for each date
-        if (!isNaN(balance)) {
-          dateBalanceMap[date] = balance;
+      // Jika balance (MUTASI) tidak ada atau invalid, set ke 0.0
+      if (date) {
+        if (balance === null || balance === undefined || balance.trim() === "") {
+          balance = 0.0; // Jika tidak ada data mutasi, tampilkan 0.0
         } else {
-          console.warn(`Invalid balance value: ${balance} for date: ${date}`);
+          // Pastikan saldo valid dengan menghapus koma dan mengubah ke angka
+          balance = parseFloat(balance.trim().replace(',', '')) || 0.0;
         }
+
+        // Menyimpan data per tanggal dengan nilai saldo terbaru
+        dateBalanceMap[date] = { balance, date };
       } else {
-        console.warn(`Missing or malformed data for date: ${date}`);
+        console.warn(`Data tidak valid pada tanggal: ${date}`);
       }
     });
 
-    // Now create the arrays for the chart
+    // Menambahkan tanggal yang unik dan memastikan semua tanggal ada di chart
     const uniqueDates = Object.keys(dateBalanceMap);
 
-    if (uniqueDates.length === 0) {
-      console.warn('No valid data to display on the chart.');
-    }
+    // Menambahkan tanggal yang tidak ada di data (untuk menampilkan 0.0)
+    const allDates = ['01/06', '03/06', '04/06']; // Contoh daftar tanggal yang diinginkan
 
-    uniqueDates.sort((a, b) => {
-      const [dayA, monthA] = a.split('/').map(Number);
-      const [dayB, monthB] = b.split('/').map(Number);
-      return monthA - monthB || dayA - dayB;
+    allDates.forEach(date => {
+      if (!dateBalanceMap[date]) {
+        dateBalanceMap[date] = { balance: 0.0, date }; // Jika tanggal tidak ada, set saldo ke 0.0
+      }
     });
 
-    uniqueDates.forEach(date => {
+    // Urutkan tanggal dalam format yang benar (ascending order)
+    const sortedDates = Object.keys(dateBalanceMap).sort((a, b) => {
+      const [dayA, monthA, yearA] = a.split('/').map(Number);
+      const [dayB, monthB, yearB] = b.split('/').map(Number);
+      const dateA = new Date(yearA, monthA - 1, dayA);
+      const dateB = new Date(yearB, monthB - 1, dayB);
+      return dateA - dateB;
+    });
+
+    // Populasi data chart
+    sortedDates.forEach(date => {
       labels.push(date);
-      balanceData.push(dateBalanceMap[date]);
+      balanceData.push(dateBalanceMap[date].balance);
     });
 
+    // Set chartData
     setChartData({
       labels: labels,
       datasets: [{
