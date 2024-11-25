@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/pertamina-dashboard/static/css/main.31cb1b20.css",
-    "main.js": "/pertamina-dashboard/static/js/main.081db091.js",
+    "main.js": "/pertamina-dashboard/static/js/main.86adab69.js",
     "static/js/453.84bdbe74.chunk.js": "/pertamina-dashboard/static/js/453.84bdbe74.chunk.js",
     "static/media/pertamina-logo.png": "/pertamina-dashboard/static/media/pertamina-logo.e672143d9321dbc9253d.png",
     "index.html": "/pertamina-dashboard/index.html",
     "main.31cb1b20.css.map": "/pertamina-dashboard/static/css/main.31cb1b20.css.map",
-    "main.081db091.js.map": "/pertamina-dashboard/static/js/main.081db091.js.map",
+    "main.86adab69.js.map": "/pertamina-dashboard/static/js/main.86adab69.js.map",
     "453.84bdbe74.chunk.js.map": "/pertamina-dashboard/static/js/453.84bdbe74.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.31cb1b20.css",
-    "static/js/main.081db091.js"
+    "static/js/main.86adab69.js"
   ]
 }
