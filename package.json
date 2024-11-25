@@ -1,7 +1,7 @@
 {
   "name": "pertamina-dashboard",
   "version": "0.1.0",
-  "homepage": "https://CahyaAgong.github.io/Pertamina-Dashboard",
+  "homepage": "https://cahyaagong.github.io/Pertamina-Dashboard/",
   "private": true,
   "dependencies": {
     "@heroicons/react": "^2.1.5",
@@ -11,6 +11,7 @@
     "apexcharts": "^4.0.0",
     "axios": "^1.7.7",
     "chart.js": "^4.4.6",
+    "gh-pages": "^6.2.0",
     "jspdf": "^2.5.2",
     "leaflet": "^1.9.4",
     "leaflet-defaulticon-compatibility": "^0.1.2",
@@ -31,7 +32,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
