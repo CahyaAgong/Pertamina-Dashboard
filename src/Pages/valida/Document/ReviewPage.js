@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
-import SidebarLayout from '../../Component/Sidebar/Layout';
+import SidebarLayout from '../../../Component/Sidebar/Layout';
 import { ChevronLeft, Bell } from 'lucide-react';
-import HeaderProfile from '../../Component/Card/HeaderProfile';
+import HeaderProfile from '../../../Component/Card/HeaderProfile';
 
 const DocumentReviewPage = () => {
   const location = useLocation();  // Access the location object to get the file from state

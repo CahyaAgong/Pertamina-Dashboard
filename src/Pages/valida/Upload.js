@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';  // Import useNavigate for navigation
 import { CloudUpload, ChevronLeft, Bell } from 'lucide-react';
-import SidebarLayout from '../Component/Sidebar/Layout';
-import HeaderProfile from '../Component/Card/HeaderProfile';
+import SidebarLayout from '../../Component/Sidebar/Layout';
+import HeaderProfile from '../../Component/Card/HeaderProfile';
 
 const UploadPage = () => {
   const { document } = useParams(); // Retrieve the dynamic document parameter

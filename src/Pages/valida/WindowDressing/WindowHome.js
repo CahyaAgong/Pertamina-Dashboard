@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { ChevronRight } from 'lucide-react';
-import HeaderProfile from '../../Component/Card/HeaderProfile';
-import SidebarLayout from '../../Component/Sidebar/Layout';
-import profileData from '../../Component/Profile.json'
-import firstJson from '../../Component/JSON/Estatement1.json'
-import secondJson from '../../Component/JSON/Estatement2.json'
+import HeaderProfile from '../../../Component/Card/HeaderProfile';
+import SidebarLayout from '../../../Component/Sidebar/Layout';
+import profileData from '../../../Component/Profile.json'
+import firstJson from '../../../Component/JSON/Estatement1.json'
+import secondJson from '../../../Component/JSON/Estatement2.json'
 
 const WindowHome = () => {
   // Function to compare and render matching date transactions

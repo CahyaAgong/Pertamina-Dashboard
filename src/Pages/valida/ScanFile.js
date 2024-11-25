@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { jsPDF } from 'jspdf';
-import SidebarLayout from '../Component/Sidebar/Layout';
+import SidebarLayout from '../../Component/Sidebar/Layout';
 import { Link } from 'react-router-dom';
 import { Search, Filter, ChevronLeft, ChevronRight } from 'lucide-react';
-import HeaderProfile from '../Component/Card/HeaderProfile';
+import HeaderProfile from '../../Component/Card/HeaderProfile';
 
 const ScannedFilesPage = () => {
   // Dummy file data

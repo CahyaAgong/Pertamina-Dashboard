@@ -1,7 +1,7 @@
 import React from 'react';
 import { Bell } from 'lucide-react'; // Import the icons you need
-import SidebarLayout from './Component/Sidebar/Layout';
-import SolutionCard from './Component/Card/SolutionCard';
+import SidebarLayout from '../../Component/valida/Sidebar/Layout';
+import SolutionCard from '../../Component/valida/Card/SolutionCard';
 
 const Dashboard = () => {
   return (
@@ -15,7 +15,7 @@ const Dashboard = () => {
             {/* Profile Icon with Tooltip */}
             <div className="relative group">
               <img
-                src={require('./Assets/Image/profile.png')} // Use a URL for the profile picture here
+                src={require('./../../Assets/Image/profile.png')} // Use a URL for the profile picture here
                 alt="Profile"
                 className="w-8 h-8 rounded-full cursor-pointer"
               />
