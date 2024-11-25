@@ -1,7 +1,7 @@
 {
   "name": "pertamina-dashboard",
   "version": "0.1.0",
-  "homepage": "https://cahyaagong.github.io/pertamina-dashboard/",
+  "homepage": "https://cahyaagong.github.io/pertamina-dashboard",
   "private": false,
   "dependencies": {
     "@heroicons/react": "^2.1.5",

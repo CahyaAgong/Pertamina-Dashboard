@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, HashRouter } from 'react-router-dom';
 import { PertaminaDashboard } from './Pages';
 // import Dashboard from './Pages/valida/Dasboard';
 // import LoginPage from './Auth/Login/Login';
@@ -17,7 +17,7 @@ import { PertaminaDashboard } from './Pages';
 
 function App() {
   return (
-    <Router>
+    <HashRouter basename="/">
       <div>
         <Routes>
           <Route path="/" element={<PertaminaDashboard />} />
@@ -32,7 +32,7 @@ function App() {
           <Route path="/window-dressing" element={<WindowHome />} /> */}
         </Routes>
       </div>
-    </Router>
+    </HashRouter>
   );
 }
 
