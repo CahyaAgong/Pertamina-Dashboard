@@ -1,8 +1,8 @@
 {
   "name": "pertamina-dashboard",
   "version": "0.1.0",
-  "homepage": "https://cahyaagong.github.io/Pertamina-Dashboard/",
-  "private": true,
+  "homepage": "https://cahyaagong.github.io/pertamina-dashboard/",
+  "private": false,
   "dependencies": {
     "@heroicons/react": "^2.1.5",
     "@testing-library/jest-dom": "^5.17.0",
