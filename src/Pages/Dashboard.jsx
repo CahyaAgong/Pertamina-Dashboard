@@ -1,10 +1,12 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useRef, useState } from 'react';
 
 import { Tabs, TabsList, TabsTrigger } from "./../Component/ui/tabs"
 import { Card, CardContent, CardHeader, CardTitle } from "./../Component/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "./../Component/ui/dialog";
 
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, PieChart, Pie, Cell, LineChart, Line } from 'recharts';
+import { FIX_NUMBER } from './../utils/constants'
+
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, PieChart, Pie, Cell, LineChart, Line, ResponsiveContainer } from 'recharts';
 import { Truck, Package, MapPin, TrendingUp, Clock, AlertCircle, CheckCircle, Share2, Droplet, Timer } from 'lucide-react';
 
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
@@ -12,6 +14,9 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css';
 import 'leaflet-defaulticon-compatibility';
+
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 // Enhanced mock data
 const volumeData = [
@@ -102,68 +107,15 @@ const StatusIndicator = ({ status }) => {
   );
 };
 
-const TruckDetailDialog = ({ truck }) => (
-  <DialogContent styles="">
-    <DialogHeader>
-      <DialogTitle className="flex items-center space-x-2">
-        <Truck className="h-5 w-5 text-red-600" />
-        <span>{truck.id} Details</span>
-      </DialogTitle>
-    </DialogHeader>
-
-    <div className="grid grid-cols-2 gap-4">
-      <div className="space-y-2">
-        <p className="text-sm text-gray-500">Status</p>
-        <StatusIndicator status={truck.status} />
-      </div>
-      <div className="space-y-2">
-        <p className="text-sm text-gray-500">Location</p>
-        <p className="text-sm font-medium">{truck.location}</p>
-      </div>
-      <div className="space-y-2">
-        <p className="text-sm text-gray-500">Barrels</p>
-        <p className="text-sm font-medium">{truck.barrels} units</p>
-      </div>
-      <div className="space-y-2">
-        <p className="text-sm text-gray-500">Fill Level</p>
-        <p className="text-sm font-medium">{truck.fillLevel}%</p>
-      </div>
-      <div className="space-y-2">
-        <p className="text-sm text-gray-500">Temperature</p>
-        <p className="text-sm font-medium">{truck.temperature}°C</p>
-      </div>
-      <div className="space-y-2">
-        <p className="text-sm text-gray-500">Pressure</p>
-        <p className="text-sm font-medium">{truck.pressure} bar</p>
-      </div>
-      <div className="space-y-2">
-        <p className="text-sm text-gray-500">Driver</p>
-        <p className="text-sm font-medium">{truck.driver}</p>
-      </div>
-      <div className="space-y-2">
-        <p className="text-sm text-gray-500">Route</p>
-        <p className="text-sm font-medium">{truck.route}</p>
-      </div>
-      <div className="space-y-2">
-        <p className="text-sm text-gray-500">Last Update</p>
-        <p className="text-sm font-medium">{truck.lastUpdate}</p>
-      </div>
-      <div className="space-y-2">
-        <p className="text-sm text-gray-500">ETA</p>
-        <p className="text-sm font-medium">{truck.eta}</p>
-      </div>
-    </div>
-  </DialogContent>
-);
-
 const PertaminaDashboard = () => {
   const [selectedPeriod, setSelectedPeriod] = useState('daily');
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [truckDetail, setTruckDetail] = useState(null)
 
   const [isUSD, setIsUSD] = useState(false)
-  const amountInIDR = 892500000;
-  const exchangeRate = 0.000066; 
+
+  const dashboardRef = useRef();
+  
   
   const openDialog = (id) => {
     const truckDetail = truckData.filter(item => item.id === id)
@@ -176,7 +128,7 @@ const PertaminaDashboard = () => {
   }
 
   const convertToUSD = (amountInIDR) => {
-    return amountInIDR * exchangeRate;
+    return amountInIDR * FIX_NUMBER.exchangeRate;
   };
 
   const formatNumber = (number) => {
@@ -188,10 +140,100 @@ const PertaminaDashboard = () => {
     const decimalPart = (number % 1).toFixed(2).slice(2);
     return `${formatNumber(integerPart)}.${decimalPart}`;
   };
-  
+
+  const TruckDetailDialog = ({ truck }) => {
+
+    const totalInIDR = truck.barrels * FIX_NUMBER.barrelToLiter * FIX_NUMBER.perBarrel;
+
+    return (
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle className="flex items-center space-x-2">
+            <Truck className="h-5 w-5 text-red-600" />
+            <span>{truck.id} Details</span>
+          </DialogTitle>
+        </DialogHeader>
+    
+        <div className="grid grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <p className="text-sm text-gray-500">Status</p>
+            <StatusIndicator status={truck.status} />
+          </div>
+          <div className="space-y-2">
+            <p className="text-sm text-gray-500">Location</p>
+            <p className="text-sm font-medium">{truck.location}</p>
+          </div>
+    
+          <div className="space-y-2">
+            <p className="text-sm text-gray-500">Barrels</p>
+            <p className="text-sm font-medium">{truck.barrels} units</p>
+          </div>
+          <div className="space-y-2">
+            <p className="text-sm text-gray-500">Fill Level</p>
+            <p className="text-sm font-medium">{truck.fillLevel}%</p>
+          </div>
+    
+          <div className="space-y-2">
+            <p className="text-sm text-gray-500">Temperature</p>
+            <p className="text-sm font-medium">{truck.temperature}°C</p>
+          </div>
+          <div className="space-y-2">
+            <p className="text-sm text-gray-500">Pressure</p>
+            <p className="text-sm font-medium">{truck.pressure} bar</p>
+          </div>
+    
+          <div className="space-y-2">
+            <p className="text-sm text-gray-500">Driver</p>
+            <p className="text-sm font-medium">{truck.driver}</p>
+          </div>
+          <div className="space-y-2">
+            <p className="text-sm text-gray-500">Route</p>
+            <p className="text-sm font-medium">{truck.route}</p>
+          </div>
+    
+          <div className="space-y-2">
+            <p className="text-sm text-gray-500">Last Update</p>
+            <p className="text-sm font-medium">{truck.lastUpdate}</p>
+          </div>
+          <div className="space-y-2">
+            <p className="text-sm text-gray-500">ETA</p>
+            <p className="text-sm font-medium">{truck.eta}</p>
+          </div>
+          
+          <div className="space-y-2">
+            <p className="text-sm text-gray-500">Calculation</p>
+            <p className="text-sm font-medium">
+            {!isUSD
+              ? `Rp ${formatNumber(totalInIDR)}`
+              : `$ ${formatUSD(convertToUSD(totalInIDR))}`}
+            </p>
+          </div>
+        </div>
+      </DialogContent>
+    )
+  };
+
+  const handleExportPDF = async () => {
+    const element = dashboardRef.current;
+
+    // Ambil screenshot elemen dengan html2canvas
+    const canvas = await html2canvas(element);
+    const imgData = canvas.toDataURL('image/png');
+
+    // Buat dokumen PDF dengan jsPDF
+    const pdf = new jsPDF();
+    const imgWidth = 190; // Lebar gambar dalam PDF (dalam mm)
+    const imgHeight = (canvas.height * imgWidth) / canvas.width; // Rasio gambar
+
+    // Tambahkan gambar ke dokumen PDF
+    pdf.addImage(imgData, 'PNG', 10, 10, imgWidth, imgHeight);
+
+    // Unduh PDF
+    pdf.save('dashboard.pdf');
+  };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
+    <div className="min-h-screen bg-gray-100 p-6" ref={dashboardRef}>
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center space-x-3">
@@ -207,7 +249,7 @@ const PertaminaDashboard = () => {
             <span className="text-xs font-medium text-gray-900">IDR / USD</span>
           </label>
 
-          <button className='px-4 py-2 text-sm font-medium text-black bg-white rounded-md shadow-md hover:bg-[#f3f4f6] flex items-center space-x-2'>
+          <button onClick={handleExportPDF} className='px-4 py-2 text-sm font-medium text-black bg-white rounded-md shadow-md hover:bg-[#f3f4f6] flex items-center space-x-2'>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-5">
               <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
             </svg>
@@ -260,8 +302,8 @@ const PertaminaDashboard = () => {
             <div className="text-2xl font-bold">
               {/* Rp 892.5M */}
               {!isUSD 
-                ? `Rp ${formatNumber(amountInIDR)}` 
-                : `$ ${formatUSD(convertToUSD(amountInIDR))}`
+                ? `Rp ${formatNumber(FIX_NUMBER.amountInIDR)}` 
+                : `$ ${formatUSD(convertToUSD(FIX_NUMBER.amountInIDR))}`
               }
             </div>
             <p className="text-xs text-green-500">+8.2% from last {selectedPeriod}</p>
@@ -359,7 +401,8 @@ const PertaminaDashboard = () => {
             <CardHeader>
               <CardTitle>Volume by Region</CardTitle>
             </CardHeader>
-            <CardContent>
+
+            <CardContent className='w-full h-[300px] flex justify-center'>
               <PieChart width={300} height={300}>
                 <Pie
                   data={volumeData}
@@ -369,6 +412,7 @@ const PertaminaDashboard = () => {
                   outerRadius={80}
                   paddingAngle={5}
                   dataKey="value"
+                  label={({ name }) => name}
                 >
                   {volumeData.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
@@ -383,6 +427,7 @@ const PertaminaDashboard = () => {
             <CardHeader>
               <CardTitle>24h Volume Timeline</CardTitle>
             </CardHeader>
+
             <CardContent>
               <LineChart width={300} height={200} data={timeData}>
                 <CartesianGrid strokeDasharray="3 3" />

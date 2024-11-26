@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, HashRouter } from 'react-router-dom';
-import { PertaminaDashboard } from './Pages';
+import { Login, PertaminaDashboard } from './Pages';
 // import Dashboard from './Pages/valida/Dasboard';
 // import LoginPage from './Auth/Login/Login';
 // import SettingsPage from './Pages/Setting';
@@ -17,22 +17,25 @@ import { PertaminaDashboard } from './Pages';
 
 function App() {
   return (
-    <HashRouter basename="/">
-      <div>
-        <Routes>
-          <Route path="/" element={<PertaminaDashboard />} />
-          {/* <Route path="/dashboar-valida" element={<Dashboard />} />
-          <Route path="/settings" element={<SettingsPage />} />
-          <Route path="/scanned-files" element={<ScannedFilesPage />} />
-          <Route path="/upload" element={<TemplateSelectionPage />} />
-          <Route path="/upload/:document" element={<UploadPage />} />
-          <Route path="/upload/:document/processed-file" element={<DocumentProcessingPage />} />
-          <Route path="/upload/:document/processed-file/review-file" element={<DocumentReviewPage />} />
-          <Route path="/analyzed-files" element={<AnalyticsDashboard />} />
-          <Route path="/window-dressing" element={<WindowHome />} /> */}
-        </Routes>
-      </div>
+    //<Router>
+    <HashRouter>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/dashboard" element={<PertaminaDashboard />} />
+
+        {/* <Route path="/dashboar-valida" element={<Dashboard />} />
+        <Route path="/settings" element={<SettingsPage />} />
+        <Route path="/scanned-files" element={<ScannedFilesPage />} />
+        <Route path="/upload" element={<TemplateSelectionPage />} />
+        <Route path="/upload/:document" element={<UploadPage />} />
+        <Route path="/upload/:document/processed-file" element={<DocumentProcessingPage />} />
+        <Route path="/upload/:document/processed-file/review-file" element={<DocumentReviewPage />} />
+        <Route path="/analyzed-files" element={<AnalyticsDashboard />} />
+        <Route path="/window-dressing" element={<WindowHome />} /> */}
+
+      </Routes>
     </HashRouter>
+    //</Router>
   );
 }
 
