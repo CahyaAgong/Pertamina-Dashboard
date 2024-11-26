@@ -1,16 +1,20 @@
 {
   "files": {
-    "main.css": "/pertamina-dashboard/static/css/main.31cb1b20.css",
-    "main.js": "/pertamina-dashboard/static/js/main.86adab69.js",
+    "main.css": "/pertamina-dashboard/static/css/main.7e5f2238.css",
+    "main.js": "/pertamina-dashboard/static/js/main.e1bfef45.js",
+    "static/js/213.f8d04bb0.chunk.js": "/pertamina-dashboard/static/js/213.f8d04bb0.chunk.js",
+    "static/js/732.a895096b.chunk.js": "/pertamina-dashboard/static/js/732.a895096b.chunk.js",
     "static/js/453.84bdbe74.chunk.js": "/pertamina-dashboard/static/js/453.84bdbe74.chunk.js",
     "static/media/pertamina-logo.png": "/pertamina-dashboard/static/media/pertamina-logo.e672143d9321dbc9253d.png",
     "index.html": "/pertamina-dashboard/index.html",
-    "main.31cb1b20.css.map": "/pertamina-dashboard/static/css/main.31cb1b20.css.map",
-    "main.86adab69.js.map": "/pertamina-dashboard/static/js/main.86adab69.js.map",
+    "main.7e5f2238.css.map": "/pertamina-dashboard/static/css/main.7e5f2238.css.map",
+    "main.e1bfef45.js.map": "/pertamina-dashboard/static/js/main.e1bfef45.js.map",
+    "213.f8d04bb0.chunk.js.map": "/pertamina-dashboard/static/js/213.f8d04bb0.chunk.js.map",
+    "732.a895096b.chunk.js.map": "/pertamina-dashboard/static/js/732.a895096b.chunk.js.map",
     "453.84bdbe74.chunk.js.map": "/pertamina-dashboard/static/js/453.84bdbe74.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.31cb1b20.css",
-    "static/js/main.86adab69.js"
+    "static/css/main.7e5f2238.css",
+    "static/js/main.e1bfef45.js"
   ]
 }
